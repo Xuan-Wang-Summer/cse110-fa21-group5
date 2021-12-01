@@ -1,12 +1,12 @@
 {
   "name": "source",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Recipe manager",
   "main": "index.js",
   "scripts": {
     "jsdoc": "jsdoc public -r -d docs",
-    "test": "jest --coverage"
-    "lint": "eslint --fix public/**/*.js",
+    "test": "jest --coverage",
+    "lint": "eslint --fix public/**/*.js"
   },
   "repository": {
     "type": "git",
