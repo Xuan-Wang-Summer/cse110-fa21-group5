@@ -10,6 +10,7 @@ node_modules/
 
 # Generated files
 source/docs/
+source/coverage/
 
 # Visual Studio Code files
 .vscode/*
