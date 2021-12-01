@@ -3,7 +3,6 @@ name: Run Unit Tests
 on:
     push:
         paths:
-            - '.github/workflows/**'
             - 'source/__tests__/**.js'
             - 'source/public/**.js'
 
