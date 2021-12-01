@@ -1,4 +1,5 @@
-/* global luxon */ // Tell ESLint to ignore undefined `luxon`.
+/* global luxon */ // Tell ESLint to ignore undefined `luxon`
+
 // util.js
 
 /**
@@ -63,6 +64,14 @@ function createIngredientList(ingredientArr) {
 	return finalIngredientList.slice(0, -2);
 }
 
+/**
+ * Takes in a list of ingredients raw from imported data and returns a neatly
+ * formatted comma separated list.
+ * @param {Object} data The recipe data object to search through.
+ * @return {Object} tagList - An object storing the tags in array and string format.
+ * @return {Array} tagList.array - Array of tags
+ * @return {string} tagList.string - String of tags
+ */
 function createTagList(data) {
 	let tagArr = [];
 	const fieldsToCheck = ['recipeCuisines', 'recipeCategory'];
@@ -83,7 +92,7 @@ function createTagList(data) {
 			}
 		} else if (Array.isArray(fieldValue)) {
 			/* CASE: Value is an array of tags */
-			tagArr.concat(fieldValue);
+			tagArr = tagArr.concat(fieldValue);
 		}
 	});
 

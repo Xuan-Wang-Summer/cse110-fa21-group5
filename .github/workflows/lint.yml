@@ -1,0 +1,46 @@
+###############################################################################
+# This workflow checks all JavaScript files that are pushed to ensure that    #
+# they are up to ESLint standards. If successful, a green checkmark will      #
+# appear in the repository, and if it fails then a red x will be seen. If     #
+# the linting check fails, then we can go through the workflow and see which  #
+# parts of the JS files need to be edited.                                    #
+###############################################################################
+
+#
+# Documentation:
+# https://help.github.com/en/articles/workflow-syntax-for-github-actions
+#
+
+name: Lint Source Code
+
+# Start job on pushes with changes to JS files
+on:
+    push:
+        paths:
+            # - '.github/workflows/**'
+            - 'source/**.js'
+
+jobs:
+    build:
+        name: Lint JS
+        runs-on: ubuntu-latest
+
+        # Load all steps
+        steps:
+            # Checkout code base
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            # Run linter against code base
+            - name: Run ESLint
+              uses: github/super-linter@v4
+              env:
+                  # Configuration
+                  LINTER_RULES_PATH: source
+                  FILTER_REGEX_INCLUDE: .*source/.*public/.*
+                  DEFAULT_BRANCH: main
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+                  # Validate only JS files
+                  VALIDATE_JAVASCRIPT_ES: true
+                  JAVASCRIPT_ES_CONFIG_FILE: '.eslintrc.json'

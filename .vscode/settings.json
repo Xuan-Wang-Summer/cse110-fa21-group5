@@ -11,5 +11,6 @@
 	"prettier.useTabs": true,
 	"[html]": {
 		"editor.defaultFormatter": "vscode.html-language-features"
-	}
+	},
+	"prettier.trailingComma": "none"
 }
