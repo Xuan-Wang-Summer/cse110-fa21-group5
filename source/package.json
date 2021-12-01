@@ -6,6 +6,7 @@
   "scripts": {
     "jsdoc": "jsdoc public -r -d docs",
     "test": "jest --coverage"
+    "lint": "eslint --fix public/**/*.js",
   },
   "repository": {
     "type": "git",

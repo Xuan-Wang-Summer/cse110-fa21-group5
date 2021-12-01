@@ -75,7 +75,7 @@ button.accordion-button {
 	border-left: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-#recipeImg {
+#image {
 	max-height: 33vh;
 }
 
@@ -97,7 +97,7 @@ button.accordion-button {
 	position: fixed;
 	bottom: 0;
 	right: 0;
-	margin: 1rem;
+	margin: 1rem 2rem;
 }
 
 /* ---------- MEDIA QUERIES ---------- */
