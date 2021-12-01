@@ -1,7 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+          border: 1px solid black;
+        }
+        
+        th {
+          border: 1px solid black;
+          text-align: left;
+          padding: 8px;
+          background-color: #0d6efd;
+          color: white;
+        }
+
+        td {
+          border: 1px solid black;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto auto auto;
+            background-color: #2196F3;
+            padding: 10px;
+        }
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            font-size: 30px;
+            text-align: center;
+        }
+    </style>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="theme-color" content="#2A52BE">
@@ -74,12 +115,34 @@
         </div>
 
         <div class="offcanvas-body">
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. At, natus ipsa sed autem aperiam
-                repudiandae
-                totam laborum hic incidunt illum vitae facilis vel nulla, accusantium molestias? Saepe doloribus in
-                natus.
-            </p>
+            <div class="nav flex-column nav-pills w-100 me-3" id="recipeTabs" role="grocerylist"
+                aria-orientation="vertical">
+                <!-- recipe lists in the drawer -->
+                <button class="nav-link active" id="groceryRecipe1" data-bs-toggle="pill" data-bs-target="#groceryRecipe1"
+                    type="button" role="tab" aria-controls="groceryRecipe1" aria-selected="true">
+                    Green Tea Noodles With Sticky Sweet Chilli Salmon Recipe
+                </button>
+                <button class="nav-link" id="groceryRecipe2" data-bs-toggle="pill" data-bs-target="#groceryRecipe2"
+                    type="button" role="tab" aria-controls="groceryRecipe2" aria-selected="false">
+                    Sesame Beef With Gochujang Udon Noodles Recipe
+                </button>
+                <button class="nav-link" id="groceryRecipe3" data-bs-toggle="pill" data-bs-target="#groceryRecipe3"
+                    type="button" role="tab" aria-controls="groceryRecipe3" aria-selected="false">
+                    Silverbeet Fatteh With Sumac Yoghurt And Chickpeas Recipe
+                </button>
+                <button class="nav-link" id="groceryRecipe4" data-bs-toggle="pill" data-bs-target="#groceryRecipe4"
+                    type="button" role="tab" aria-controls="groceryRecipe4" aria-selected="false">
+                    Tomato Vodka Rigatoni Recipe
+                </button>
+                <button class="nav-link" id="groceryRecipe5" data-bs-toggle="pill" data-bs-target="#groceryRecipe5"
+                    type="button" role="tab" aria-controls="groceryRecipe5" aria-selected="false">
+                    Lemon Chicken Recipe
+                </button>
+                <button class="nav-link" id="groceryRecipe6" data-bs-toggle="pill" data-bs-target="#groceryRecipe6"
+                    type="button" role="tab" aria-controls="groceryRecipe6" aria-selected="false">
+                    Iceberg With Dried Oregano Dressing And Creamy Sheep's Milk Cheese Recipe
+                </button>
+            </div>
 
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search for a recipe!" aria-label="Search">
@@ -95,6 +158,65 @@
                 <h2 class="text-center">Meal Planner</h2>
 
                 <!-- TODO: Main content -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sunday</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Breakfast Recipe</td>
+                            <td>Breakfast Recipe</td>
+                            <td>Breakfast Recipe</td>
+                            <td>Breakfast Recipe</td>
+                            <td>Breakfast Recipe</td>
+                            <td>Breakfast Recipe</td>
+                            <td>Breakfast Recipe</td>
+                        </tr>
+                        <tr>
+                            <td>Lunch Recipe</td>
+                            <td>Lunch Recipe</td>
+                            <td>Lunch Recipe</td>
+                            <td>Lunch Recipe</td>
+                            <td>Lunch Recipe</td>
+                            <td>Lunch Recipe</td>
+                            <td>Lunch Recipe</td>
+                        </tr>
+                        <tr>
+                            <td>Dinner Recipe</td>
+                            <td>Dinner Recipe</td>
+                            <td>Dinner Recipe</td>
+                            <td>Dinner Recipe</td>
+                            <td>Dinner Recipe</td>
+                            <td>Dinner Recipe</td>
+                            <td>Dinner Recipe</td>
+                        </tr>
+                    </tbody>
+
+                  </table>
+
+                  <!-- ignore/using for testing -->
+                  <!-- 
+                  <div class="grid-container">
+                    <div class="grid-item"></div>
+                    <div class="grid-item">Monday</div>
+                    <div class="grid-item">Tuesday</div>  
+                    <div class="grid-item">4</div>
+                    <div class="grid-item">5</div>
+                    <div class="grid-item">6</div>  
+                    <div class="grid-item">7</div>
+                    <div class="grid-item">8</div>
+                    <div class="grid-item">9</div>  
+                  </div>
+                  -->
             </section>
         </main>
     </div>
