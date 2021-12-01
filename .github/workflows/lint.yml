@@ -22,7 +22,7 @@ on:
 
 jobs:
     build:
-        name: Lint JS
+        name: Lint
         runs-on: ubuntu-latest
 
         # Load all steps
@@ -37,7 +37,7 @@ jobs:
               env:
                   # Configuration
                   LINTER_RULES_PATH: source
-                  FILTER_REGEX_INCLUDE: .*source/.*
+                  FILTER_REGEX_INCLUDE: .*source/.*public/.*
                   DEFAULT_BRANCH: main
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
