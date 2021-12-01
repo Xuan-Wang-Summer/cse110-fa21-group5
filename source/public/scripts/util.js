@@ -1,4 +1,5 @@
 /* global luxon */ // Tell ESLint to ignore undefined `luxon`
+
 // util.js
 
 /**

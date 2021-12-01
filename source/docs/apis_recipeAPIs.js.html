@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>apis/recipeAPIs.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#@private">@private</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#activateAddBtn">activateAddBtn</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#activateCreateBtn">activateCreateBtn</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#activateDeleteBtn">activateDeleteBtn</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#activateDrawerEditing">activateDrawerEditing</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#activateSpeechBtn">activateSpeechBtn</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#caloriesKeysSteven">caloriesKeysSteven</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#caloriesNinjasNutritions">caloriesNinjasNutritions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createIngredientList">createIngredientList</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createTagList">createTagList</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#deleteCornerBtns">deleteCornerBtns</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getIngredientInfo">getIngredientInfo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getRecipeInformation">getRecipeInformation</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#id">id</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#ingredientsSearch">ingredientsSearch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#initializeDrawer">initializeDrawer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#initializeServiceWorker">initializeServiceWorker</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#initializeTooltips">initializeTooltips</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#invalidRecipe">invalidRecipe</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#params">params</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#parseISO">parseISO</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#populateDrawer">populateDrawer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#populateRecipe">populateRecipe</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#recipeDiv">recipeDiv</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#recipeJSON">recipeJSON</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#searchForKey">searchForKey</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#searchRecipe">searchRecipe</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#source">source</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#TIME_FIELDS">TIME_FIELDS</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#userRecipes">userRecipes</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">apis/recipeAPIs.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import axios from 'axios';
+
+/**
+ * Key for Steven to use for debug purpose, please create your own api
+ * keys from the respective website due to the limited api calls
+ */
+const caloriesKeysSteven = '5GBHQsGWEdmha62FEClqHA==dsca062CLoWKcGKd';
+const spoonKeysSteven = '68dc1ad99018418687b7c1c160f799fa';
+
+/**
+ * Get a detailed list of nutrition information for each item from an input text query.
+ *
+ * @param {string} query the text query that contains recipe information
+ * @return {Array} An array of items given by the queries with the detailed nurtitions
+ */
+export async function caloriesNinjasNutritions(query) {
+	try {
+		const resp = await axios.get(`https://api.calorieninjas.com/v1/nutrition?query=${query}`, {
+			headers: { 'X-Api-Key': caloriesKeysSteven },
+		});
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+/**
+ * Search through hundreds of thousands of recipes using advanced filtering and ranking. NOTE: This method combines searching by query, by ingredients, and by nutrients into one endpoint.
+ *
+ * @param {Object} params A JavaScript object that contains different types of params given in https://spoonacular.com/food-api/docs#Search-Recipes-Complex
+ * @return {Object} A JavaScript object that contains all the results in an array
+ */
+export async function searchRecipe(params) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoonKeysSteven}?query=${params.query}`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+/**
+ * Use a recipe id to get full information about a recipe, such as ingredients, nutrition, diet and allergen information, etc.
+ *
+ * @param {number} id A JavaScript object that contains different types of params given in https://spoonacular.com/food-api/docs#Search-Recipes-Complex
+ * @return {Object} A JavaScript object that contains all the information of the given recipe
+ */
+export async function getRecipeInformation(id) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/recipes/${id}/information?apiKey=${spoonKeysSteven}`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+/**
+ * Search for simple whole foods (e.g. fruits, vegetables, nuts, grains, meat, fish, dairy etc.).
+ *
+ * @param {string} query The partial or full ingredient name.
+ * @return {Object} A JavaScript object that contains all the information of the query
+ */
+export async function ingredientsSearch(query) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/food/ingredients/search?apiKey=${spoonKeysSteven}?query=${query}`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+/**
+ * Use an ingredient id to get all available information about an ingredient, such as its image and supermarket aisle.
+ *
+ * @param {number} id The ingredient id.
+ * @return {Object} A JavaScript object that contains all the information of the given ingredient
+ */
+export async function getIngredientInfo(id) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=${spoonKeysSteven}`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Dec 01 2021 07:31:49 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

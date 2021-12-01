@@ -1,0 +1,55 @@
+{
+	"@context": "https://schema.org/",
+	"@type": "Recipe",
+	"name": "",
+	"description": "",
+	"url": "",
+	"author": {
+		"@type": "person",
+		"name": "Me"
+	},
+	"publisher": {
+		"@type": "Organization",
+		"name": "Me"
+	},
+	"dateCreated": "",
+	"datePublished": "",
+	"dateModified": "",
+	"lastViewed": "",
+	"prepTime": "PT0M",
+	"cookTime": "PT0M",
+	"totalTime": "PT0M",
+	"recipeYield": "",
+	"recipeIngredient": [],
+	"recipeInstructions": [],
+	"nutrition": {
+		"@type": "NutritionInformation",
+		"calories": "",
+		"carbohydrateContent": "",
+		"cholesterolContent": "",
+		"fiberContent": "",
+		"fatContent": "",
+		"unsaturatedFatContent": "",
+		"saturatedFatContent": "",
+		"proteinContent": "",
+		"sodiumContent": "",
+		"sugarContent": ""
+	},
+	"aggregateRating": {
+		"@type": "AggregateRating",
+		"ratingValue": "",
+		"ratingCount": ""
+	},
+	"image": {
+		"@type": "ImageObject",
+		"url": "",
+		"width": 0,
+		"height": 0
+	},
+	"video": {
+		"@type": "VideoObject",
+		"name": "",
+		"description": "",
+		"contentUrl": ""
+	}
+}
