@@ -22,7 +22,7 @@ on:
 
 jobs:
     build:
-        name: Lint
+        name: Lint JS
         runs-on: ubuntu-latest
 
         # Load all steps
