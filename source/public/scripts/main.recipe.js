@@ -156,7 +156,7 @@ function activateSpeechBtn() {
 			}else if(InputMsg === 'Stop' || InputMsg === 'Stop.'){
 				continueRecognition = false;
 			}
-		}
+		};
 		// continuously start recognition
 		Recognition.onend = function() {
 			if(continueRecognition == true){
@@ -166,7 +166,7 @@ function activateSpeechBtn() {
 				OutputMsg.text = 'Thank you for using speech recognition service!';
 				window.speechSynthesis.speak(OutputMsg);
 			}
-		}
+		};
 	});
 }
 
