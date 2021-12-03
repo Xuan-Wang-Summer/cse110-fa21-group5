@@ -7,6 +7,8 @@ import axios from 'axios';
 const caloriesKeysSteven = '5GBHQsGWEdmha62FEClqHA==dsca062CLoWKcGKd';
 const spoonKeysSteven = '68dc1ad99018418687b7c1c160f799fa';
 
+const spoonKeysXuan = '5bd98417a6494312893bbfdcc8e5d60c';
+
 /**
  * Get a detailed list of nutrition information for each item from an input text query.
  *
@@ -88,6 +90,42 @@ export async function getIngredientInfo(id) {
 	try {
 		const resp = await axios.get(
 			`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=${spoonKeysSteven}`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+/**
+ * Find recipes which are similar to the given one.
+ *
+ * @param {number} id The recipe id.
+ * @return {Object} A JavaScript object that contains all the results in an array
+ */
+export async function getSimilarRecipe(id) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/recipes/${id}/similar?apiKey=${spoonKeysXuan}?number=5`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+/**
+ * Search for substitutes for a given ingredient.
+ *
+ * @param {string} name The ingredient id.
+ * @return {Object} A JavaScript object that contains all the substitutes for a given ingredient.
+ */
+export async function getIngredientSubstitutes(name) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/food/ingredients/substitutes?apiKey=${spoonKeysXuan}?ingredientName=${name}`,
 			{ headers: { 'Content-Type': 'application/json' } }
 		);
 		console.log(resp.data);
