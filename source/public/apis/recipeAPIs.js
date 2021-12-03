@@ -104,7 +104,7 @@ export async function getIngredientInfo(id) {
  * @param {number} id The recipe id.
  * @return {Object} A JavaScript object that contains all the results in an array
  */
- export async function getSimilarRecipe(id) {
+export async function getSimilarRecipe(id) {
 	try {
 		const resp = await axios.get(
 			`https://api.spoonacular.com/recipes/${id}/similar?apiKey=${spoonKeysXuan}?number=5`,
@@ -122,7 +122,7 @@ export async function getIngredientInfo(id) {
  * @param {string} name The ingredient id.
  * @return {Object} A JavaScript object that contains all the substitutes for a given ingredient.
  */
- export async function getIngredientSubstitutes(name) {
+export async function getIngredientSubstitutes(name) {
 	try {
 		const resp = await axios.get(
 			`https://api.spoonacular.com/food/ingredients/substitutes?apiKey=${spoonKeysXuan}?ingredientName=${name}`,
