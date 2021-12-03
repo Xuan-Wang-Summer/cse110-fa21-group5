@@ -7,7 +7,6 @@ import axios from 'axios';
 const caloriesKeysSteven = '5GBHQsGWEdmha62FEClqHA==dsca062CLoWKcGKd';
 const spoonKeysSteven = '68dc1ad99018418687b7c1c160f799fa';
 
-const caloriesKeysXuan = '7lUUQ1EIC2AJsGtbVO5kKA==r5QosbQ3B8dPaj8a';
 const spoonKeysXuan = '5bd98417a6494312893bbfdcc8e5d60c';
 
 /**
