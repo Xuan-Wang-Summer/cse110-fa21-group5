@@ -65,10 +65,13 @@
     -   Linting workflow
     -   JSDoc workflow
     -   Unit test workflow
+        -   Designing unit tests for `util.js`
+    -   Exploring other features like Prettier & HTML Validator
 
 ### Chris & Hanming
 
 -   Front-end
+    -   Home page recipe cards
     -   Grocery list structure
         -   List of ingredients
         -   Recipes to filter displayed ingredients
@@ -78,18 +81,37 @@
 
 ### Divneet
 
--   Back-end: Schema Documentation
+-   Back-end: Schema Documentation (`/specs/schema`)
     -   Research on schema.org & back-end structure
     -   Recipes schema
     -   Meal planner schema
     -   Grocery list schema
+
+### Julian
+
+- Front-end
+  - Helped inform further design & wireframe work
+  - Followed along learning about main front-end changes
+  - Worked on the meal planner
+  - Researching Google Calendar API
 
 ### Stephen & Xuan
 
 - Back-end: API Research & Integration
   - Researched CalorieNinjas and Spoonacular for important endpoints
   - Created documentation on these endpoints
-  - 
+  - Created an API script file to access these endpoints
+
+### Adory
+
+-	Overseeing progress across teams
+-	Pipeline: Vetting artifacts & workflows
+-	Implementing CRUD functionality
+-	Administration:
+	-	Meeting notes
+	-	Various artifacts
+	-	Enforcing repo structure & guidelines
+	-	GitHub Project/Issue tracking
 
 ---
 
@@ -101,7 +123,7 @@
 
 ## Decisions & Takeaways
 
--   Looking good so far - make it through the last stretch!
+-   Main functionality is complete - just make finishing touches and implementations!
 
 ---
 

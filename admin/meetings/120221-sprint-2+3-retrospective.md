@@ -26,20 +26,13 @@
 
 ### Previous Meeting
 
--   Sprint 1 Review: Updates on development phase
--   More resources & guidance
-    -   Canvas assignments
-    -   Priority tasks
-    -   Project milestones
--
+-   We will be going over sprint 2 & 3 progress.
 
 ### Current Meeting
 
--   We will be going over sprint 2 & 3 progress.
+-   Running Retrospectives activities.
 
 ### For next time!
-
--   Running Retrospectives activities.
 
 ---
 
@@ -53,9 +46,27 @@
 
 ---
 
-## Retrium
+## Retrium: Mad-Sad-Glad
 
-![asdf](../misc/mad-sad-glad-2+3.png)
+### Mad
+-	Many members felt overwhelmed and busy during the quarter
+-	Some members didn't know how to best keep up to date with the team's progress
+	-	**Takeaway:** Bring more focus & attention to standups, progress announcements, meeting notes
+
+### Sad
+-	Many members felt kinda lost with the overall project direction
+	-	Weren't sure how the work across the different teams would come together
+	-	Couldn't easily track the progress & success of the project
+	-	**Takeaway:** More inter-team meetings, more push on discussion/manager meeting attendance
+-	Hard to balance this quarter with new in-person obligations & situations
+
+### Glad
+-	Many members were able to learn some new cool stuff throughout the project
+-	Team members still felt trust with asking others for help & catching up
+-	We were able to make good progress at a good pace throughout the project
+
+
+![Board](../misc/mad-sad-glad-2+3.png)
 
 ---
 
@@ -68,6 +79,8 @@
 ## Decisions & Takeaways
 
 -   Looking good so far - make it through the last stretch!
+-   Retrospectively - faciliate even more communication & team-wide announcements
+    -   Synchronous availability would have made this much more easier!
 
 ---
 
