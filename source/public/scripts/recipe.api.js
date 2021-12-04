@@ -1,13 +1,16 @@
-import axios from 'axios';
+/* global axios */ // Tell ESLint to ignore undefined `axios`
 
 /**
  * Key for Steven to use for debug purpose, please create your own api
  * keys from the respective website due to the limited api calls
  */
-const caloriesKeysSteven = '5GBHQsGWEdmha62FEClqHA==dsca062CLoWKcGKd';
+// const caloriesKeysSteven = '5GBHQsGWEdmha62FEClqHA==dsca062CLoWKcGKd';
 const spoonKeysSteven = '68dc1ad99018418687b7c1c160f799fa';
 
 const spoonKeysXuan = '5bd98417a6494312893bbfdcc8e5d60c';
+
+// Multipurpose
+const CALORIE_NINJA_KEY = 'bg5LD9Ye8OlYYu+e2CtVJA==8w4QRD7W415wtEvb';
 
 /**
  * Get a detailed list of nutrition information for each item from an input text query.
@@ -17,10 +20,14 @@ const spoonKeysXuan = '5bd98417a6494312893bbfdcc8e5d60c';
  */
 export async function caloriesNinjasNutritions(query) {
 	try {
-		const resp = await axios.get(`https://api.calorieninjas.com/v1/nutrition?query=${query}`, {
-			headers: { 'X-Api-Key': caloriesKeysSteven },
+		const resp = await axios.get(`https://api.calorieninjas.com/v1/nutrition`, {
+			headers: { 'X-Api-Key': CALORIE_NINJA_KEY },
+			params: {
+				query
+			}
 		});
 		console.log(resp.data);
+		return resp.data;
 	} catch (error) {
 		console.error(error);
 	}

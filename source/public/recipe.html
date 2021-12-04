@@ -273,34 +273,31 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
                     <div id="nutritionInfo" class="collapse">
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item">
-                                <b>Calories:</b> <span class="nutrition-value">866 kcal</span>
+                                <b>Calories:</b> <span id="calories">N/A</span>
                             </li>
                             <li class="list-inline-item">
-                                <b>Carbohydrates:</b> <span class="nutrition-value">55 g</span>
+                                <b>Carbohydrates:</b> <span id="carbohydrateContent">N/A</span> g
                             </li>
                             <li class="list-inline-item">
-                                <b>Cholesterol:</b> <span class="nutrition-value">168 mg</span>
+                                <b>Cholesterol:</b> <span id="cholesterolContent">N/A</span> mg
                             </li>
                             <li class="list-inline-item">
-                                <b>Fiber:</b> <span class="nutrition-value">2 g</span>
+                                <b>Fiber:</b> <span id="fiberContent">N/A</span> g
                             </li>
                             <li class="list-inline-item">
-                                <b>Fat:</b> <span class="nutrition-value">46 g</span>
+                                <b>Fat:</b> <span id="fatContent">N/A</span> g
                             </li>
                             <li class="list-inline-item">
-                                <b>Unsaturated Fat:</b> <span class="nutrition-value">0 g</span>
+                                <b>Saturated Fat:</b> <span id="saturatedFatContent">N/A</span> g
                             </li>
                             <li class="list-inline-item">
-                                <b>Saturated Fat:</b> <span class="nutrition-value">20 g</span>
+                                <b>Protein:</b> <span id="proteinContent">N/A</span> g
                             </li>
                             <li class="list-inline-item">
-                                <b>Protein:</b> <span class="nutrition-value">54 g</span>
+                                <b>Sodium:</b> <span id="sodiumContent">N/A</span> mg
                             </li>
                             <li class="list-inline-item">
-                                <b>Sodium:</b> <span class="nutrition-value">2003 mg</span>
-                            </li>
-                            <li class="list-inline-item">
-                                <b>Sugar:</b> <span class="nutrition-value">13 g</span>
+                                <b>Sugar:</b> <span id="sugarContent">N/A</span> g
                             </li>
                         </ul>
                     </div>
@@ -388,6 +385,8 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
     </div>
 
     <!-- JS Libraries -->
+    <!-- # Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- # Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -399,6 +398,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
     <!-- Custom JS -->
     <script src="/scripts/main.js"></script>
     <script src="/scripts/util.js" type="module"></script>
+    <script src="/scripts/recipe.api.js" type="module"></script>
     <script src="/scripts/main.recipe.js" type="module"></script>
 </body>
 
