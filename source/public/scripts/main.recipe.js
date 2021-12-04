@@ -1,6 +1,7 @@
 /* global luxon */ // Tell ESLint to ignore undefined `luxon`.
 // main.recipe.js
 
+import { caloriesNinjasNutritions } from './recipe.api.js';
 import { searchForKey, parseISO, createTagList } from './util.js';
 
 // ----- Variables -----
@@ -26,6 +27,19 @@ recipeJSON.setAttribute('type', 'application/ld+json');
 
 /** ['prepTime', 'cookTime', 'totalTime'] */
 const TIME_FIELDS = ['prepTime', 'cookTime', 'totalTime'];
+
+/** {'CalorieNinjas Name': 'JSON Name'} */
+const CALORIE_NINJAS_MAP = {
+	calories: 'calories',
+	carbohydrates_total_g: 'carbohydrateContent',
+	cholesterol_mg: 'cholesterolContent',
+	fiber_g: 'fiberContent',
+	fat_total_g: 'fatContent',
+	fat_saturated_g: 'saturatedFatContent',
+	protein_g: 'proteinContent',
+	sodium_mg: 'sodiumContent',
+	sugar_g: 'sugarContent'
+};
 
 /**
  * Container with recipe data elements.
@@ -101,67 +115,62 @@ function activateSpeechBtn() {
 		OutputMsg.volume = 1; //0-1
 
 		// An introduction for customers.
-		OutputMsg.text = "Hello! Speech recognition service can help you get instructions step by step without touching your phones. Say, Next, to start instructions or move to the next step. Say, Repeat, to let me repeat what I said. Say, Back, to move to previous step, Say, Stop. to end the speech service.";
+		OutputMsg.text =
+			'Hello! Speech recognition service can help you get instructions step by step without touching your phones. Say, Next, to start instructions or move to the next step. Say, Repeat, to let me repeat what I said. Say, Back, to move to previous step, Say, Stop. to end the speech service.';
 		window.speechSynthesis.speak(OutputMsg);
 
 		// Speech Recognition setting
-		let Recognition = new window.webkitSpeechRecognition;
+		let Recognition = new window.webkitSpeechRecognition();
 		Recognition.lang = 'en';
 		Recognition.continuous = false;
 		Recognition.interimResults = false;
 		Recognition.maxAlternative = 1;
 
 		let currentStep = -1; // it starts from -1 because we need command 'next' to start the first step.
-		console.log(document.getElementsByTagName("ol")[0].children);
-		let continueRecognition = true;//continuously run speech recognition or not
+		console.log(document.getElementsByTagName('ol')[0].children);
+		let continueRecognition = true; //continuously run speech recognition or not
 		Recognition.start();
 
-		Recognition.onresult = function(event){
+		Recognition.onresult = function (event) {
 			var InputMsg = event.results[0][0].transcript;
 			console.log(InputMsg);
 
-
-			if(InputMsg === 'Next' || InputMsg === 'Next.'){
-				if(currentStep >= document.getElementsByTagName("ol")[0].children.length-1){
+			if (InputMsg === 'Next' || InputMsg === 'Next.') {
+				if (currentStep >= document.getElementsByTagName('ol')[0].children.length - 1) {
 					OutputMsg.text = 'we just went through the final step!';
 					//Response when users call 'next' when they already reach the final step.
 					window.speechSynthesis.speak(OutputMsg);
-				}else{
+				} else {
 					currentStep++;
-					OutputMsg.text = document.getElementsByTagName("ol")[0].children[currentStep].innerText;
+					OutputMsg.text = document.getElementsByTagName('ol')[0].children[currentStep].innerText;
 					window.speechSynthesis.speak(OutputMsg);
 				}
-
-
-			}else if(InputMsg === 'Repeat' || InputMsg === 'Repeat.'){
+			} else if (InputMsg === 'Repeat' || InputMsg === 'Repeat.') {
 				window.speechSynthesis.speak(OutputMsg);
-
-
-			}else if(InputMsg === 'Back' || InputMsg === 'Back.'){
-				if(currentStep == -1){
-					OutputMsg.text = "we have not started the cooking instructions yet. Say 'next' to start the instruction";
+			} else if (InputMsg === 'Back' || InputMsg === 'Back.') {
+				if (currentStep == -1) {
+					OutputMsg.text =
+						'we have not started the cooking instructions yet. Say \'next\' to start the instruction';
 					//Response when users call 'back' when they haven't called any 'next'.
 					window.speechSynthesis.speak(OutputMsg);
-				}else if(currentStep == 0){
+				} else if (currentStep == 0) {
 					OutputMsg.text = 'we just went through the first step!';
 					//Response when users call 'back' when they already reach back to the first back.
 					window.speechSynthesis.speak(OutputMsg);
-				}else{
+				} else {
 					currentStep--;
-					OutputMsg.text = document.getElementsByTagName("ol")[0].children[currentStep].innerText;
+					OutputMsg.text = document.getElementsByTagName('ol')[0].children[currentStep].innerText;
 					window.speechSynthesis.speak(OutputMsg);
 				}
-
-
-			}else if(InputMsg === 'Stop' || InputMsg === 'Stop.'){
+			} else if (InputMsg === 'Stop' || InputMsg === 'Stop.') {
 				continueRecognition = false;
 			}
 		};
 		// continuously start recognition
-		Recognition.onend = function() {
-			if(continueRecognition == true){
+		Recognition.onend = function () {
+			if (continueRecognition == true) {
 				Recognition.start();
-			}else{
+			} else {
 				//Thank Users in the End.
 				OutputMsg.text = 'Thank you for using speech recognition service!';
 				window.speechSynthesis.speak(OutputMsg);
@@ -191,6 +200,42 @@ function activateDeleteBtn() {
 	});
 }
 
+function fetchNutrition() {
+	let data = JSON.parse(recipeJSON.textContent);
+
+	// Nutrition has not been stored - store it & populate front-end
+	// TODO: Make API Call with current ingredients
+	const ingredientsString = searchForKey(data, 'recipeIngredient').join(', ');
+	caloriesNinjasNutritions(ingredientsString).then((response) => {
+		const nutritionTotal = response.items.reduce((previousItem, currentItem) => {
+			for (const nutritionFact in previousItem) {
+				previousItem[nutritionFact] += currentItem[nutritionFact];
+			}
+
+			return previousItem;
+		});
+
+		for (const nutritionFact in nutritionTotal) {
+			const jsonMapping = CALORIE_NINJAS_MAP[nutritionFact];
+			if (jsonMapping) {
+				const nutritionValue = nutritionTotal[nutritionFact];
+				data.nutrition[jsonMapping] = Math.round(nutritionValue);
+			}
+		}
+
+		console.log('updating nutrition...');
+		console.log(data);
+
+		populateRecipe(data);
+
+		/* Edit recipe in local storage */
+		let userRecipes = JSON.parse(localStorage.getItem('recipes'));
+		userRecipes[id] = data;
+
+		localStorage.setItem('recipes', JSON.stringify(userRecipes));
+	});
+}
+
 /**
  * Populates recipe content with recipe data.
  * @param {Object} data - Recipe data.
@@ -214,7 +259,6 @@ function populateRecipe(data) {
 	const title = document.getElementById('title');
 	title.textContent = searchForKey(data, 'name');
 
-	// TODO: Source & Link
 	// Source author or organization
 	const source = document.getElementById('source');
 	if (searchForKey(data, 'publisher')) {
@@ -251,7 +295,20 @@ function populateRecipe(data) {
 	const servings = document.getElementById('servings');
 	servings.textContent = searchForKey(data, 'recipeYield') || 'N/A';
 
-	// TODO: Nutrition
+	// TODO: Nutrition (Make API call on ingredients)
+	const storedNutrition = searchForKey(data, 'nutrition');
+	if (!isNaN(storedNutrition.calories) && !isNaN(storedNutrition.fatContent)) {
+		// Nutrition is already stored - populate front-end
+		for (const nutritionFact in storedNutrition) {
+			const nutritionElement = document.getElementById(nutritionFact);
+
+			if (nutritionElement) {
+				nutritionElement.textContent = storedNutrition[nutritionFact];
+			}
+		}
+	} else {
+		fetchNutrition();
+	}
 
 	// Description
 	const description = document.getElementById('description');
@@ -379,7 +436,7 @@ function activateDrawerEditing() {
 		'image',
 		'description',
 		'source',
-		'url',
+		'url'
 	];
 
 	/** Mappings of element id to json field name */
@@ -389,7 +446,7 @@ function activateDrawerEditing() {
 		image: ['image.url'],
 		ingredients: 'recipeIngredient',
 		steps: 'recipeInstructions',
-		source: ['author.name', 'publisher.name'],
+		source: ['author.name', 'publisher.name']
 	};
 
 	elementIds.forEach((elementId) => {
@@ -416,29 +473,6 @@ function activateDrawerEditing() {
 						if (field.includes('.')) {
 							// CASE: Nested field
 							const fieldArr = field.split('.'); // [parent, child]
-
-							// TODO: Optimize image uploads somehow - currently too big for storage
-							// if (elementId === 'image') {
-							// 	const file = event.target.files[0];
-							// 	const reader = new FileReader();
-
-							// 	reader.addEventListener('load', function () {
-							// 		data[fieldArr[0]][fieldArr[1]] = reader.result;
-
-							// 		// Update front-end preview
-							// 		populateRecipe(data);
-
-							// 		/* Edit recipe in local storage */
-							// 		let userRecipes = JSON.parse(localStorage.getItem('recipes'));
-							// 		userRecipes[id] = data;
-
-							// 		localStorage.setItem('recipes', JSON.stringify(userRecipes));
-							// 	});
-
-							// 	if (file) {
-							// 		reader.readAsDataURL(file);
-							// 	}
-							// }
 
 							data[fieldArr[0]][fieldArr[1]] = newValue;
 						} else {
@@ -472,6 +506,12 @@ function activateDrawerEditing() {
 
 			localStorage.setItem('recipes', JSON.stringify(userRecipes));
 		});
+	});
+
+	// Update nutrition upon committing an ingredients change.
+	const ingredientsInput = document.getElementById('ingredientsInput');
+	ingredientsInput.addEventListener('change', function () {
+		fetchNutrition();
 	});
 }
 
@@ -537,7 +577,7 @@ if (!source || isNaN(id)) {
 	// Activate delete button
 	activateDeleteBtn();
 
-	// Show edit drawer upon showing a completely new recipe 
+	// Show edit drawer upon showing a completely new recipe
 	if (location.hash === '#new') {
 		const drawer = document.getElementById('drawer');
 		drawer.classList.add('show');
