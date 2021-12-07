@@ -229,10 +229,11 @@ function fetchNutrition() {
 		populateRecipe(data);
 
 		/* Edit recipe in local storage */
-		let userRecipes = JSON.parse(localStorage.getItem('recipes'));
-		userRecipes[id] = data;
-
-		localStorage.setItem('recipes', JSON.stringify(userRecipes));
+		if (source == 'user') {
+			let userRecipes = JSON.parse(localStorage.getItem('recipes'));
+			userRecipes[id] = data;
+			localStorage.setItem('recipes', JSON.stringify(userRecipes));
+		}
 	});
 }
 
@@ -297,7 +298,7 @@ function populateRecipe(data) {
 
 	// TODO: Nutrition (Make API call on ingredients)
 	const storedNutrition = searchForKey(data, 'nutrition');
-	if (!isNaN(storedNutrition.calories) && !isNaN(storedNutrition.fatContent)) {
+	if (storedNutrition.calories && storedNutrition.fatContent) {
 		// Nutrition is already stored - populate front-end
 		for (const nutritionFact in storedNutrition) {
 			const nutritionElement = document.getElementById(nutritionFact);

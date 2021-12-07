@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>scripts/main.index.js - Documentation</title>
+    <title>scripts/recipe.api.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">scripts/main.index.js</h1>
+    <h1 class="page-title">scripts/recipe.api.js</h1>
     
 
     
@@ -39,117 +39,148 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// main.index.js
+            <pre class="prettyprint source linenums"><code>/* global axios */ // Tell ESLint to ignore undefined `axios`
 
-import { createIngredientList, createTagList, searchForKey, parseISO } from './util.js';
-
-// ----- Functions -----
 /**
- * "Create new recipe" button logic.
+ * Key for Steven to use for debug purpose, please create your own api
+ * keys from the respective website due to the limited api calls
  */
-function activateCreateBtn() {
-	const createBtn = document.getElementById('createBtn');
-	createBtn.addEventListener('click', function () {
-		/**
-		 * Fetch template recipe schema for new recipe.
-		 */
-		fetch('/data/recipe-schema.json')
-			.then((response) => response.json())
-			.then((recipeSchema) => {
-				/**
-				 * Create new recipe.
-				 */
-				// Retreive recipes array and push new recipe.
-				const userRecipes = JSON.parse(localStorage.getItem('recipes')) || [];
-				userRecipes.push(recipeSchema);
+// const caloriesKeysSteven = '5GBHQsGWEdmha62FEClqHA==dsca062CLoWKcGKd';
+const spoonKeysSteven = '68dc1ad99018418687b7c1c160f799fa';
 
-				// Update recipes array in storage.
-				localStorage.setItem('recipes', JSON.stringify(userRecipes));
+const spoonKeysXuan = '5bd98417a6494312893bbfdcc8e5d60c';
 
-				// Redirect user to their new recipe.
-				window.location.href = `/recipe.html?source=user&amp;id=${userRecipes.length - 1}#new`;
-			})
-			.catch((err) => console.error(err));
-	});
+// Multipurpose
+const CALORIE_NINJA_KEY = 'bg5LD9Ye8OlYYu+e2CtVJA==8w4QRD7W415wtEvb';
+
+/**
+ * Get a detailed list of nutrition information for each item from an input text query.
+ *
+ * @param {string} query the text query that contains recipe information
+ * @return {Array} An array of items given by the queries with the detailed nurtitions
+ */
+export async function caloriesNinjasNutritions(query) {
+	try {
+		const resp = await axios.get(`https://api.calorieninjas.com/v1/nutrition`, {
+			headers: { 'X-Api-Key': CALORIE_NINJA_KEY },
+			params: {
+				query
+			}
+		});
+		console.log(resp.data);
+		return resp.data;
+	} catch (error) {
+		console.error(error);
+	}
 }
 
-function createCards(recipeArr, source, parent) {
-	const templateCard = document.querySelector('.recipe-card');
-
-	recipeArr.forEach((recipe, index) => {
-		// Clone new card
-		const newCard = templateCard.cloneNode(true);
-		newCard.classList.remove('d-none');
-
-		// Thumbnail
-		const thumbnail = newCard.querySelector('.thumbnail');
-		thumbnail.src = searchForKey(recipe, 'image').url;
-		thumbnail.alt = searchForKey(recipe, 'name');
-
-		// Rating
-		const rating = newCard.querySelector('.rating');
-		const ratingValue = parseFloat(searchForKey(recipe, 'ratingValue'));
-		if (ratingValue) {
-			rating.src = `/images/stars/${Math.round(ratingValue)}-star.svg`;
-			rating.alt = `${ratingValue} stars`;
-		} else {
-			rating.classList.add('d-none');
-		}
-
-		// Title
-		const title = newCard.querySelector('.title');
-		title.textContent = searchForKey(recipe, 'name');
-		title.title = title.textContent;
-		const params = new URLSearchParams();
-		params.append('source', source);
-		params.append('id', index);
-		title.href = `/recipe.html?${params}`;
-
-		// Tags
-		const tags = newCard.querySelector('.tags');
-		tags.textContent = searchForKey(recipe, 'tags') || createTagList(recipe).string;
-
-		// Author
-		const author = newCard.querySelector('.author');
-		author.textContent = searchForKey(recipe, 'author').name;
-
-		// Cook time
-		const cookTime = newCard.querySelector('.cook-time');
-		cookTime.textContent = parseISO(searchForKey(recipe, 'totalTime'));
-
-		// Description
-		const description = newCard.querySelector('.description');
-		description.textContent = searchForKey(recipe, 'description');
-
-		// Ingredients
-		const ingredients = newCard.querySelector('.ingredients');
-		ingredients.textContent = createIngredientList(searchForKey(recipe, 'recipeIngredient'));
-
-		parent.appendChild(newCard);
-	});
+/**
+ * Search through hundreds of thousands of recipes using advanced filtering and ranking. NOTE: This method combines searching by query, by ingredients, and by nutrients into one endpoint.
+ *
+ * @param {Object} params A JavaScript object that contains different types of params given in https://spoonacular.com/food-api/docs#Search-Recipes-Complex
+ * @return {Object} A JavaScript object that contains all the results in an array
+ */
+export async function searchRecipe(params) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoonKeysSteven}?query=${params.query}`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
 }
 
-// ----- Page Initialization -----
 /**
- * Fetch preset recipes to populate frontend.
+ * Use a recipe id to get full information about a recipe, such as ingredients, nutrition, diet and allergen information, etc.
+ *
+ * @param {number} id A JavaScript object that contains different types of params given in https://spoonacular.com/food-api/docs#Search-Recipes-Complex
+ * @return {Object} A JavaScript object that contains all the information of the given recipe
  */
-fetch('/data/recipe-data.json')
-	.then((response) => response.json())
-	.then((presetRecipes) => {
-		for (const source in presetRecipes) {
-			createCards(presetRecipes[source], source, document.getElementById('presetCardGrid'));
-		}
-	})
-	.catch((err) => console.error(err));
+export async function getRecipeInformation(id) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/recipes/${id}/information?apiKey=${spoonKeysSteven}`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
 
 /**
- * Fetch user recipes to populate frontend.
+ * Search for simple whole foods (e.g. fruits, vegetables, nuts, grains, meat, fish, dairy etc.).
+ *
+ * @param {string} query The partial or full ingredient name.
+ * @return {Object} A JavaScript object that contains all the information of the query
  */
-const userRecipes = JSON.parse(localStorage.getItem('recipes')) || [];
-createCards(userRecipes, 'user', document.getElementById('userCardGrid'));
+export async function ingredientsSearch(query) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/food/ingredients/search?apiKey=${spoonKeysSteven}?query=${query}`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
 
-// Activate create button
-activateCreateBtn();
+/**
+ * Use an ingredient id to get all available information about an ingredient, such as its image and supermarket aisle.
+ *
+ * @param {number} id The ingredient id.
+ * @return {Object} A JavaScript object that contains all the information of the given ingredient
+ */
+export async function getIngredientInfo(id) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=${spoonKeysSteven}`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+/**
+ * Find recipes which are similar to the given one.
+ *
+ * @param {number} id The recipe id.
+ * @return {Object} A JavaScript object that contains all the results in an array
+ */
+export async function getSimilarRecipe(id) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/recipes/${id}/similar?apiKey=${spoonKeysXuan}?number=5`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+/**
+ * Search for substitutes for a given ingredient.
+ *
+ * @param {string} name The ingredient id.
+ * @return {Object} A JavaScript object that contains all the substitutes for a given ingredient.
+ */
+export async function getIngredientSubstitutes(name) {
+	try {
+		const resp = await axios.get(
+			`https://api.spoonacular.com/food/ingredients/substitutes?apiKey=${spoonKeysXuan}?ingredientName=${name}`,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		console.log(resp.data);
+	} catch (error) {
+		console.error(error);
+	}
+}
 </code></pre>
         </article>
     </section>
