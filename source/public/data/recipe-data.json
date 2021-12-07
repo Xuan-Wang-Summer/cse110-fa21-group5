@@ -722,7 +722,7 @@
       "totalTime": null,
       "recipeYield": 4,
       "nutrition": {
-        "calories": null,
+        "calories": "3018",
         "fatContent": "122",
         "saturatedFatContent": "19",
         "carbohydrateContent": "149",
