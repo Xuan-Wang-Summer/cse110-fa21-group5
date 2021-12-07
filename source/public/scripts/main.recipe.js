@@ -229,10 +229,11 @@ function fetchNutrition() {
 		populateRecipe(data);
 
 		/* Edit recipe in local storage */
-		let userRecipes = JSON.parse(localStorage.getItem('recipes'));
-		userRecipes[id] = data;
-
-		localStorage.setItem('recipes', JSON.stringify(userRecipes));
+		if (source == 'user') {
+		    let userRecipes = JSON.parse(localStorage.getItem('recipes'));
+		    userRecipes[id] = data;
+		    localStorage.setItem('recipes', JSON.stringify(userRecipes));
+		} 
 	});
 }
 
