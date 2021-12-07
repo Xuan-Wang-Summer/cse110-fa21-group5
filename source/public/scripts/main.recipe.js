@@ -230,10 +230,10 @@ function fetchNutrition() {
 
 		/* Edit recipe in local storage */
 		if (source == 'user') {
-		    let userRecipes = JSON.parse(localStorage.getItem('recipes'));
-		    userRecipes[id] = data;
-		    localStorage.setItem('recipes', JSON.stringify(userRecipes));
-		} 
+			let userRecipes = JSON.parse(localStorage.getItem('recipes'));
+			userRecipes[id] = data;
+			localStorage.setItem('recipes', JSON.stringify(userRecipes));
+		}
 	});
 }
 
