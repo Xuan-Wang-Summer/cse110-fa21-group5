@@ -297,7 +297,7 @@ function populateRecipe(data) {
 
 	// TODO: Nutrition (Make API call on ingredients)
 	const storedNutrition = searchForKey(data, 'nutrition');
-	if (!isNaN(storedNutrition.calories) && !isNaN(storedNutrition.fatContent)) {
+	if (storedNutrition.calories && storedNutrition.fatContent) {
 		// Nutrition is already stored - populate front-end
 		for (const nutritionFact in storedNutrition) {
 			const nutritionElement = document.getElementById(nutritionFact);
