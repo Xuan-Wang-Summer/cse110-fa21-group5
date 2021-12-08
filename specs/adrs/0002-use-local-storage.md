@@ -1,6 +1,6 @@
 # Use local storage for storing recipes
 
--   Status: accepted
+-   Status: Accepted
 -   Date: 2021-11-03
 
 ## Context and Problem Statement
@@ -9,12 +9,12 @@ We need a way to store the recipe data and populate recipe view with the stored 
 
 ## Considered Options
 
--   local storage
--   database
+-   Local storage
+-   Database
 
 ## Decision Outcome
 
-Chosen option: "local storage"
+Chosen option: "local storage", because it is less complex but offers the main functionality to users still.
 
 ### Positive Consequences
 
@@ -29,10 +29,10 @@ Chosen option: "local storage"
 -   If users' server dies, the data will die with it.
 -   Users cannot access their data virtually.
 
-## Links 
+## Links
 
--   {local storage schemas} {(https://github.com/cse110-fa21-group5/cse110-fa21-group5/issues/30)}
--   {recipe edits} {https://github.com/cse110-fa21-group5/cse110-fa21-group5/issues/29}
--   {delete function} {https://github.com/cse110-fa21-group5/cse110-fa21-group5/issues/29}
+-   [Local storage schemas](https://github.com/cse110-fa21-group5/cse110-fa21-group5/tree/main/specs/schemas)
+-   [Issue implementing recipe edits](https://github.com/cse110-fa21-group5/cse110-fa21-group5/issues/29)
+-   [First CRUD functionality commit (#26, #30, #31, #36)](https://github.com/cse110-fa21-group5/cse110-fa21-group5/commit/8099ba6bc0540973a334002dbd7093343feabf29)
 
 <!-- markdownlint-disable-file MD013 -->

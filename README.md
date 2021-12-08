@@ -1,5 +1,9 @@
 # cse110-fa21-group5
 
+[![CodeFactor][codefactor-shield]](https://www.codefactor.io/repository/github/cse110-fa21-group5/cse110-fa21-group5)
+[![Netlify Status][netlify-shield]](https://team-ocean-recipes.netlify.app/)
+![Run Unit Tests](https://github.com/cse110-fa21-group5/cse110-fa21-group5/actions/workflows/run-unit-tests.yml/badge.svg)
+
 ## 📘 Our single source of truth!
 
 -   Visit our [team page](admin/team.md) for more details about our team!
@@ -38,6 +42,8 @@ performing CRUD operations on recipes.
 ## 📝 Documentation
 
 -   [Source code guidelines](/source/README.md)
+-   [JSDoc](/source/docs)
+-   [Wiki](https://github.com/cse110-fa21-group5/cse110-fa21-group5/wiki)
 
 ### 💻 Tech Stack
 
@@ -53,3 +59,6 @@ performing CRUD operations on recipes.
     -   External APIs
         -   Spoonacular
         -   CalorieNinjas
+
+[codefactor-shield]: https://img.shields.io/codefactor/grade/github/cse110-fa21-group5/cse110-fa21-group5/main
+[netlify-shield]: https://img.shields.io/netlify/0552da19-8d05-408c-963e-04f9ea60650d?color=blue
