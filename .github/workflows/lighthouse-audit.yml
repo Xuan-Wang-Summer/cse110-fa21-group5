@@ -1,0 +1,15 @@
+name: Lighthouse
+on: [pull_request]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Lighthouse Audit
+      id: lighthouse-audit
+      uses: foo-software/lighthouse-check-action@master
+      with:
+        urls: 'https://team-ocean-recipes.netlify.app/'
+        gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
+        prCommentEnabled: true
+        device: 'desktop'
