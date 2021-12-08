@@ -2,10 +2,6 @@
 
 ## Info
 
-### Main Topics
-
--   (Work in progress)
-
 ### Time & Place
 
 -   Group 5
@@ -30,13 +26,50 @@
 
 ### Previous Meeting
 
+-   Sprint 2 Progress
+    -   Canvas assignments
+    -   Teams
+-   Moving forward
+
 ### Current Meeting
+
+-   Sprint 3 Progress
+    -   CRUD functionality
+    -   Canvas assignments
+-   Moving forward
 
 ### For next time!
 
+-   Progress
+-   Final priorities
+-   Conclusion & last remarks
+
 ---
 
-## Section 1
+## Sprint 3 Progress
+
+### CRUD Functionality
+
+-   Most main functionality complete
+-   Still finalizing:
+    -   Create from scratch
+    -   Editing
+    -   Recipe population
+-   Add-on & quality of life still left
+    -   URL Import
+    -   Nutrition
+    -   Serving size
+    -   Bookmark
+
+### Canvas Assignments
+
+-   Pipeline phase 1 deadline
+    -   Adding unit tests
+    -   JSDoc
+    -   Submission artifacts
+-   Sprint review and retrospective meetings
+-   ADR's
+    -   Submit gradually
 
 ---
 
@@ -44,19 +77,10 @@
 
 ### Remaining Questions / Concerns
 
--   Question 1
--   Concern 1
-
 ---
 
 ## Decisions & Takeaways
 
--   Decision
-    -   Reason 1
-    -   Reason 2
-    -   Counterpoints
-        -   Counterpoint 1
-
 ---
 
-Meeting finish time:
+Meeting finish time: 12:00pm (1 hr)

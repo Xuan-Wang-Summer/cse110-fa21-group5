@@ -26,22 +26,44 @@
 
 ### Previous Meeting
 
+-   Sprint 3 Progress
+    -   CRUD functionality
+    -   Canvas assignments
+-   Moving forward
+
 ### Current Meeting
 
--   Current updates
--   Finishing up
-
-### For next time!
+-   Progress
+-   Final priorities
+-   Conclusion & last remarks
 
 ---
 
-## Finishing up
+## Progress
 
--	Wiki
--	Worry about 2/3 add-on features
-	-	Speech recognition
-	-	Meal planner
-	-	Grocery list
+-   Finished main crud functionality
+-   Still have some add-on features left
+    -   Optional to complete - finish the main features & artifacts first
+
+## Final Priorities
+
+-	Final pipeline
+-   Wiki
+-   Worry about only finishing 2/3 add-on features
+    -   Speech recognition
+    -   Meal planner
+    -   Grocery list
+-   Canvas assignments
+    -   Team member evaluations
+        -   Avoid being personal!
+    -   Status videos
+        -   Public (short)
+        -   Private (longer & serious)
+
+## Conclusion
+
+-	Sanat has been a great mentor
+-	The project has gone suprisingly smooth compared to previous teams
 
 ---
 
