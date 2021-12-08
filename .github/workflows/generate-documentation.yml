@@ -1,10 +1,11 @@
 name: Generate Documentation
 
-# on: pull_request
 on:
     push:
+        branches:
+            - main
         paths:
-            - '.github/workflows/**'
+            - '.github/workflows/generate-documentation.yml'
             - 'source/**.js'
 
 jobs:
