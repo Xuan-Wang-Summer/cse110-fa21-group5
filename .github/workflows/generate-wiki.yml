@@ -32,6 +32,7 @@ jobs:
 
             - name: Compile JSDoc Files
               run: |
+                  npm init -y
                   npm install --save-dev jsdoc-to-markdown
                   npx -c 'jsdoc2md source/public/scripts/util.js' > "wiki-pages/JSDoc - util.js"
 
