@@ -34,7 +34,7 @@ jobs:
               run: |
                   npm init -y
                   npm install --save-dev jsdoc-to-markdown
-                  npx -c 'jsdoc2md source/public/scripts/util.js' > wiki-pages/JSDoc-util.js
+                  npx -c 'jsdoc2md source/public/scripts/util.js' > wiki-pages/JSDoc:-util.js.md
 
             - name: Upload Files to Wiki
               uses: SwiftDocOrg/github-wiki-publish-action@v1
