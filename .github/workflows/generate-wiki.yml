@@ -4,7 +4,7 @@ name: Generate Wiki
 on:
     push:
         paths:
-            - '.github/workflows/**'
+            - '.github/workflows/generate-wiki.yml'
             - 'admin/team.md'
             - 'admin/cipipeline/phase1.md'
             - 'source/README.md'
@@ -30,10 +30,10 @@ jobs:
               with:
                   node-version: '14'
 
-            - run: npm install --save-dev jsdoc-to-markdown
-
             - name: Compile JSDoc Files
-              run: npx -c 'jsdoc2md source/public/scripts/util.js' > "wiki-pages/JSDoc - util.js"
+              run: |
+              npm install --save-dev jsdoc-to-markdown
+              npx -c 'jsdoc2md source/public/scripts/util.js' > "wiki-pages/JSDoc - util.js"
 
             - name: Upload Files to Wiki
               uses: SwiftDocOrg/github-wiki-publish-action@v1
