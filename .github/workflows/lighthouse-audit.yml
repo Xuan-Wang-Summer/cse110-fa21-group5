@@ -5,6 +5,18 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    - name: Create comment
+      id: pr-comment
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        body: |
+          Generating a Lighthouse Report for [https://team-ocean-recipes.netlify.app/](https://team-ocean-recipes.netlify.app/)
+          .
+          .
+          .
     - name: Lighthouse Audit
       id: lighthouse-audit
       uses: foo-software/lighthouse-check-action@master
@@ -13,3 +25,16 @@ jobs:
         gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
         prCommentEnabled: true
         device: 'desktop'
+    - name: Update a comment
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        comment-id: ${{steps.pr-comment.outputs.comment-id}}
+        body: |
+          Report finished!
+
+          ### Lighthouse Audit Results
+          - Accessibility Score: ${{ fromJson(steps.lighthouse-audit.outputs.lighthouseCheckResults).data[0].scores.accessibility }}
+          - Best Practices Score: ${{ fromJson(steps.lighthouse-audit.outputs.lighthouseCheckResults).data[0].scores.bestPractices }}
+          - Peformance Score: ${{ fromJson(steps.lighthouse-audit.outputs.lighthouseCheckResults).data[0].scores.performance }}
+          - Progressive Web App Score: ${{ fromJson(steps.lighthouse-audit.outputs.lighthouseCheckResults).data[0].scores.progressiveWebApp }}
+          - SEO Score: ${{ fromJson(steps.lighthouse-audit.outputs.lighthouseCheckResults).data[0].scores.seo }}
