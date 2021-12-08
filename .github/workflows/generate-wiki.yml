@@ -5,7 +5,7 @@ on:
         branches:
             - main
         paths:
-            - '.github/workflows/**'
+            - '.github/workflows/generate-wiki.yml'
             - 'admin/team.md'
             - 'admin/cipipeline/phase1.md'
             - 'source/README.md'

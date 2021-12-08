@@ -21,10 +21,10 @@ jobs:
             - name: Compile Docs
               uses: andstor/jsdoc-action@v1
               with:
-                  source_dir: ./source
+                  source_dir: ./source/public/scripts
                   output_dir: ./source/docs
                   template: minami
-                  front_page: README.md
+                  front_page: ./source/README.md
                   recurse: true
 
             - name: Commit and Push

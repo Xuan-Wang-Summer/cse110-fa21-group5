@@ -42,7 +42,7 @@ performing CRUD operations on recipes.
 ## 📝 Documentation
 
 -   [Source code guidelines](/source/README.md)
--   [JSDoc](/source/docs)
+-   [JSDoc](https://cse110-fa21-group5.github.io/cse110-fa21-group5/source/docs/)
 -   [Wiki](https://github.com/cse110-fa21-group5/cse110-fa21-group5/wiki)
 
 ### 💻 Tech Stack
