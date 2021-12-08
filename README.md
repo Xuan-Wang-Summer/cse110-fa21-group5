@@ -1,4 +1,4 @@
-# cse110-fa21-group5
+# 🌊 Team Ocean's Recipe Manager
 
 [![CodeFactor][codefactor-shield]](https://www.codefactor.io/repository/github/cse110-fa21-group5/cse110-fa21-group5)
 [![Netlify Status][netlify-shield]](https://team-ocean-recipes.netlify.app/)
@@ -14,15 +14,20 @@
 -   `/.vscode/settings.json`: Project-wide configurations for VS Code
 -   `/admin`: Administrative material
     -   `/admin/branding`: Branding materials (logos, color schemes, etc.)
+    -   `/admin/cipipeline`: Pipeline artifacts (breakdown, diagram, video)
     -   `/admin/meetings`: Meeting minutes (notes)
     -   `/admin/misc`: Miscellaneous material like team rules
     -   `/admin/videos`: Videos (team intro, team status, etc.)
 -   `/source`: Source code
-    -   `/source/public`: Client-side code that will be accessible by the public
+    -   `/source/__tests__`: Unit tests
+    -   `/source/docs`: Generated JSDoc for source code
+    -   `/source/public`: Client side code that will be accessible by the public
 -   `/specs`: Project specs
     -   `/specs/adrs`: Architectural Decision Records
+    -   `/specs/api-docs`: External API documentation and research
     -   `/specs/brainstorm`: Brainstorming artifacts
     -   `/specs/pitch`: Pitch deck & other artifacts
+    -   `/specs/schemas`: Schemas for back-end storage structures
 
 ## 💡 Summary/Abstract
 

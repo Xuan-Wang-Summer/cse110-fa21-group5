@@ -1,0 +1,10 @@
+{
+	"day": "",
+	"meals": [
+		{
+			"@type": "Event",
+			"name": "",
+			"about": ""
+		}
+	]
+}

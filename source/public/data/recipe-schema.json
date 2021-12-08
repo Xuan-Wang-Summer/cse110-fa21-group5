@@ -4,8 +4,10 @@
 	"name": "",
 	"description": "",
 	"url": "",
+	"bookmarked": false,
+	"tags": "",
 	"author": {
-		"@type": "person",
+		"@type": "Person",
 		"name": "Me"
 	},
 	"publisher": {
@@ -45,11 +47,5 @@
 		"url": "",
 		"width": 0,
 		"height": 0
-	},
-	"video": {
-		"@type": "VideoObject",
-		"name": "",
-		"description": "",
-		"contentUrl": ""
 	}
 }
