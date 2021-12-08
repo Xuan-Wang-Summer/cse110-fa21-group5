@@ -4,7 +4,7 @@ name: Generate Wiki
 on:
     push:
         paths:
-            - '.github/workflows/*wiki*'
+            - '.github/workflows/**'
             - 'admin/team.md'
             - 'admin/cipipeline/phase1.md'
             - 'source/README.md'
