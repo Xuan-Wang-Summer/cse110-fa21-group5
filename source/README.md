@@ -1,8 +1,7 @@
 # Project Source Code
 
 [![CodeFactor](https://www.codefactor.io/repository/github/cse110-fa21-group5/cse110-fa21-group5/badge?s=5332332ef2c647f086442b3584693dbe4a0b2068)](https://www.codefactor.io/repository/github/cse110-fa21-group5/cse110-fa21-group5)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0552da19-8d05-408c-963e-04f9ea60650d/deploy-status)](https://team-ocean-stage.netlify.app/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0552da19-8d05-408c-963e-04f9ea60650d/deploy-status)](https://team-ocean-recipes.netlify.app/)
 
 ## 🚀 Getting Started
 

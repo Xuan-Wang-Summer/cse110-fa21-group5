@@ -4,7 +4,7 @@
 // Page Initialization
 window.addEventListener('DOMContentLoaded', async function () {
 	if (window.location.protocol === 'https:') {
-		initializeServiceWorker();
+		// initializeServiceWorker();
 	}
 
 	// Initialize front-end
@@ -13,9 +13,11 @@ window.addEventListener('DOMContentLoaded', async function () {
 });
 
 /**
+ * PWA/SPA ABANDONED:
  * Detects if there's a service worker, then loads it and begins the process
  * of installing it and getting it running.
  */
+// eslint-disable-next-line no-unused-vars
 function initializeServiceWorker() {
 	if ('serviceWorker' in navigator) {
 		window.addEventListener('load', function () {

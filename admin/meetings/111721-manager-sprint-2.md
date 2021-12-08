@@ -41,6 +41,11 @@
 
 ### For next time!
 
+-   Sprint 3 Progress
+    -   CRUD functionality
+    -   Canvas assignments
+-   Moving forward
+
 ---
 
 ## Sprint 2 Progress
