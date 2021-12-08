@@ -17,7 +17,7 @@ name: Lint Source Code
 on:
     push:
         paths:
-            # - '.github/workflows/**'
+            - '.github/workflows/lint.yml'
             - 'source/**.js'
 
 jobs:

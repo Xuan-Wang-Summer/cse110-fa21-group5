@@ -1,8 +1,9 @@
 name: Generate Wiki
 
-# on: pull_request
 on:
     push:
+        branches:
+            - main
         paths:
             - '.github/workflows/**'
             - 'admin/team.md'
@@ -35,6 +36,9 @@ jobs:
                   npm init -y
                   npm install --save-dev jsdoc-to-markdown
                   npx -c 'jsdoc2md source/public/scripts/util.js' > wiki-pages/JSDoc:-util.js.md
+                  npx -c 'jsdoc2md source/public/scripts/main.js' > wiki-pages/JSDoc:-main.js.md
+                  npx -c 'jsdoc2md source/public/scripts/main.index.js' > wiki-pages/JSDoc:-main.index.js.md
+                  npx -c 'jsdoc2md source/public/scripts/main.recipe.js' > wiki-pages/JSDoc:-main.recipe.js.md
 
             - name: Upload Files to Wiki
               uses: SwiftDocOrg/github-wiki-publish-action@v1
