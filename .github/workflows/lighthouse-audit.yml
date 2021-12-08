@@ -23,7 +23,7 @@ jobs:
       with:
         urls: 'https://team-ocean-recipes.netlify.app/'
         gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
-        prCommentEnabled: true
+        prCommentEnabled: false # toggle this to use foo's default PR comment for audit results
         device: 'desktop'
     - name: Update a comment
       uses: peter-evans/create-or-update-comment@v1
@@ -33,6 +33,7 @@ jobs:
           Report finished!
 
           ### Lighthouse Audit Results
+          Note: Tests ran on desktop device.
           - Accessibility Score: ${{ fromJson(steps.lighthouse-audit.outputs.lighthouseCheckResults).data[0].scores.accessibility }}
           - Best Practices Score: ${{ fromJson(steps.lighthouse-audit.outputs.lighthouseCheckResults).data[0].scores.bestPractices }}
           - Peformance Score: ${{ fromJson(steps.lighthouse-audit.outputs.lighthouseCheckResults).data[0].scores.performance }}
