@@ -16,7 +16,8 @@ jobs:
             - name: Checkout Code
               uses: actions/checkout@v2
               with:
-                  token: {{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+                  token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
             - name: Compile Docs
               uses: andstor/jsdoc-action@v1
               with:
