@@ -1,0 +1,4 @@
+{
+	"fileServerFolder": "public",
+	"testFiles": "**/crud.spec.js"
+}
