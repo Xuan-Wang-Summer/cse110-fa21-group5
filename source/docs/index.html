@@ -48,81 +48,131 @@
 
 
     <section class="readme">
-        <article><h1>cse110-fa21-group5</h1>
-<p><a href="https://www.codefactor.io/repository/github/cse110-fa21-group5/cse110-fa21-group5"><img src="https://img.shields.io/codefactor/grade/github/cse110-fa21-group5/cse110-fa21-group5/main" alt="CodeFactor"></a>
-<a href="https://team-ocean-recipes.netlify.app/"><img src="https://img.shields.io/netlify/0552da19-8d05-408c-963e-04f9ea60650d?color=blue" alt="Netlify Status"></a></p>
-<h2>📘 Our single source of truth!</h2>
+        <article><h1>Project Source Code</h1>
+<p><a href="https://www.codefactor.io/repository/github/cse110-fa21-group5/cse110-fa21-group5"><img src="https://www.codefactor.io/repository/github/cse110-fa21-group5/cse110-fa21-group5/badge?s=5332332ef2c647f086442b3584693dbe4a0b2068" alt="CodeFactor"></a>
+<a href="https://team-ocean-recipes.netlify.app/"><img src="https://api.netlify.com/api/v1/badges/0552da19-8d05-408c-963e-04f9ea60650d/deploy-status" alt="Netlify Status"></a></p>
+<h2>🚀 Getting Started</h2>
+<h3>Git Commit Guidelines</h3>
 <ul>
-<li>Visit our <a href="admin/team.md">team page</a> for more details about our team!</li>
+<li>Check if you have Git installed on your computer with a minimum version of 2.0.0 by running <code>git --version</code> in your terminal.</li>
+<li>If you do not have Git, install it <a href="https://git-scm.com/downloads">here</a>. (You may have to restart VS Code after installing)</li>
 </ul>
+<ol>
+<li>Make sure you have the latest version of <code>main</code> by running <code>git pull origin main</code></li>
+<li>Create &amp; checkout a new branch to work on with this command &amp; naming scheme:
+<ul>
+<li><code>git checkout -b [firstname]+[partnername]-[feature-topic]</code> (example branch name: <code>adory+hanming-api-testing</code>)</li>
+</ul>
+</li>
+<li>Work on &amp; change ONLY the files that correspond to your feature/topic. If you notice minor discrepancies in unrelated files, create GitHub issues for them.</li>
+<li>Make sure you use Prettier to reformat style and run <code>eslint --fix</code> in <code>/source</code> to lint your code before committing. (Discussed in Coding section below)</li>
+<li>Add &amp; commit your files with VS Code or Git commands. Your commit message should follow this format: <code>Add/Update/[Verb] [things changed] (#[issue number])&quot;</code>.
+<ul>
+<li>Example: <code>Update style guidelines (#2)</code></li>
+<li>Git commands: <code>git add .</code> and <code>git commit -m &quot;Add/Update/[Verb] __ (#[issue number])&quot;</code></li>
+</ul>
+</li>
+<li>If you want to update the remote repostiory, push your changes.</li>
+<li>If you then want to merge your changes with the main branch, create a pull request to your branch
+<a href="https://github.com/cse110-fa21-group5/cse110-fa21-group5/pulls">here</a>.
+<ul>
+<li>Netlify should</li>
+</ul>
+</li>
+</ol>
+<h3>Coding Environment</h3>
+<ol>
+<li>Install <a href="https://code.visualstudio.com/download">VS Code</a> as it will be our primary editor with configurations to keep consistent style.</li>
+<li>Make sure you have these extensions installed:
+<ol>
+<li>ESLint</li>
+<li>Live Share</li>
+<li>Prettier</li>
+<li>Visual Studio IntelliCode</li>
+<li>Live Server (should already own from early labs)</li>
+</ol>
+</li>
+<li>Open the VS Code terminal and <code>cd</code> to the <code>/source</code> folder.</li>
+<li>Run <code>npm install</code> to install ESLint for linting your JS style. (You need Node.js installed for this, but you should have it from earlier lab instructions)</li>
+<li>You should now be ready to code! The <code>.eslintrc.json</code> file and the <code>/.vscode/settings.json</code> file define style configurations that your VS Code
+should use to warn you about when your style is off.
+<ol>
+<li>When you write code, use <code>Alt+Shift+F</code> or <code>Option+Shift+F</code> to have Prettier reformat the entire document, which will fix indents and stuff.</li>
+<li>Before committing, run <code>eslint --fix</code> from the <code>/source</code> directory in your terminal to lint your code.</li>
+</ol>
+</li>
+<li>To test the code, the Live Server extension we've been using in the labs should be sufficient.</li>
+<li>If you are working with a partner, the Live Share extension is useful for collaborative coding.
+<ol>
+<li>Open the Live Share tab in VS Code</li>
+<li>Start a session &amp; share the link to whoever you want to join you!</li>
+</ol>
+</li>
+</ol>
 <h2>📁 File Structure</h2>
 <ul>
-<li><code>/.github/workflows</code>: GitHub Actions workflows</li>
-<li><code>/.vscode/settings.json</code>: Project-wide configurations for VS Code</li>
-<li><code>/admin</code>: Administrative material
+<li><code>public</code> will contain all of the files accessible by the client/user.
 <ul>
-<li><code>/admin/branding</code>: Branding materials (logos, color schemes, etc.)</li>
-<li><code>/admin/meetings</code>: Meeting minutes (notes)</li>
-<li><code>/admin/misc</code>: Miscellaneous material like team rules</li>
-<li><code>/admin/videos</code>: Videos (team intro, team status, etc.)</li>
+<li><code>.dev</code>: Exploratory programming
+<ul>
+<li>Create any new files for exploring and experimenting in here!</li>
 </ul>
 </li>
-<li><code>/source</code>: Source code
+<li><code>components</code>: HTML for repeated components in views (sidebar, drawer, etc.).</li>
+<li><code>images</code>: Images for the app.</li>
+<li><code>scripts</code>: JavaScript for the app.
 <ul>
-<li><code>/source/public</code>: Client-side code that will be accessible by the public</li>
+<li><code>main.js</code> is the initialization script for every view on the app. It initializes front-end functionality like tooltips.</li>
+<li><code>template.js</code> is a file you can use as a reference for your scripts.</li>
+<li><code>[view-name].js</code>: Use this naming scheme for scripts specific to an HTML view.</li>
 </ul>
 </li>
-<li><code>/specs</code>: Project specs
+<li><code>styles</code>: CSS styles for the app.
 <ul>
-<li><code>/specs/adrs</code>: Architectural Decision Records</li>
-<li><code>/specs/brainstorm</code>: Brainstorming artifacts</li>
-<li><code>/specs/pitch</code>: Pitch deck &amp; other artifacts</li>
+<li><code>styles.css</code> defines global styles to be used across the app.</li>
+<li><code>[view-name].css</code>: Use this naming scheme for stylesheets specific to an HTML view.</li>
+</ul>
+</li>
+<li><code>index.html</code> is the home page, which will display recipes.</li>
+<li><code>template.html</code> is a file you can use as a reference for your HTML.</li>
 </ul>
 </li>
 </ul>
-<h2>💡 Summary/Abstract</h2>
-<p><strong>We aim to create a recipe manager that provides
-personalization and organization to keep cooking
-efficient and productive for newer cooks &amp; active
-and health-conscious individuals.</strong> The recipe
-manager is designed to help users on their mission to
-improve their long-term diet in favor of homemade
-meals rather than takeout &amp; junk food through the
-week. In addition, the recipe manager addresses
-important micro-level concerns like following a recipe’s
-ingredients &amp; steps while cooking, tracking necessary
-ingredients for recipes in a grocery list, and easily
-performing CRUD operations on recipes.</p>
-<h2>📝 Documentation</h2>
+<h2>Further Style Instructions</h2>
+<h3>Front-end</h3>
 <ul>
-<li><a href="/source/README.md">Source code guidelines</a></li>
-</ul>
-<h3>💻 Tech Stack</h3>
+<li>Use VS Code's built in <a href="https://code.visualstudio.com/docs/editor/emmet">Emmet</a> feature to quickly create new tabs
 <ul>
-<li>Static HTML</li>
-<li>CSS
+<li>Press Tab after writing a selector to create the element.
 <ul>
-<li>Bootstrap</li>
-<li>Font Awesome Icons</li>
+<li>Example: Pressing Tab after typing <code>a#submitBtn.btn.btn-primarry</code> will create an <code>&lt;a&gt;</code> element with the respective id and classes.</li>
 </ul>
 </li>
-<li>JS
-<ul>
-<li>ESLint</li>
-<li>Web APIs
-<ul>
-<li>Web Storage API</li>
-<li>Fetch API</li>
+<li>Emmet also has a shortcut for creating placeholder text: Press Tab after typing <code>lorem</code>.</li>
 </ul>
 </li>
-<li>External APIs
+<li>Use absolute paths starting with <code>/</code> for internal links in HTML (ex: <code>/images/favicon.ico</code>)</li>
+<li>If an element has an <code>id</code>, make sure there is only one, and that the <code>id</code> is the first attribute in the opening tag.</li>
+<li>When using Bootstrap classes, try to put them in this order in the class list: <code>Component -&gt; Alignment/Structure -&gt; Styling -&gt; Spacing</code>
 <ul>
-<li>Spoonacular</li>
-<li>CalorieNinjas</li>
+<li>Example: <code>class=&quot;btn btn-lg btn-primary position-fixed text-light mb-3&quot;</code>
+<ul>
+<li>Button component classes -&gt; Fixed position -&gt; Light text color -&gt; Bottom margin</li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<h3>Back-end</h3>
+<ul>
+<li>Make sure to comment &amp; check console logs so that debugging messages are not always on.</li>
+</ul>
+<h2>🗒️ Resources</h2>
+<ul>
+<li><a href="https://github.com/cse110-fa21-group5/cse110-fa21-group5/issues">GitHub Repo Issues</a></li>
+<li><a href="https://github.com/orgs/cse110-fa21-group5/projects/1/views/1">GitHub Project Board</a></li>
+<li><a href="https://getbootstrap.com/docs/5.1">Bootstrap 5.1 Docs (use the search bar!)</a></li>
+<li><a href="https://fontawesome.com/v6.0/icons?m=free">Font Awesome 6.0 Icon Gallery</a></li>
 </ul></article>
     </section>
 

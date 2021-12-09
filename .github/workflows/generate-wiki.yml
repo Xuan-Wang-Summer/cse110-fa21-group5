@@ -1,0 +1,48 @@
+name: Generate Wiki
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - '.github/workflows/generate-wiki.yml'
+            - 'admin/team.md'
+            - 'admin/cipipeline/phase1.md'
+            - 'source/README.md'
+            - 'source/public/scripts/util.js'
+
+jobs:
+    generate:
+        name:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+
+            - name: Compile Markdown Files
+              run: |
+                  mkdir wiki-pages
+                  cp admin/team.md wiki-pages/Team.md
+                  cp admin/cipipeline/phase1.md wiki-pages/Pipeline.md
+                  cp source/README.md wiki-pages/Development-Guidelines.md
+
+            - name: Use Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '14'
+
+            - name: Compile JSDoc Files
+              run: |
+                  npm init -y
+                  npm install --save-dev jsdoc-to-markdown
+                  npx -c 'jsdoc2md source/public/scripts/util.js' > wiki-pages/JSDoc:-util.js.md
+                  npx -c 'jsdoc2md source/public/scripts/main.js' > wiki-pages/JSDoc:-main.js.md
+                  npx -c 'jsdoc2md source/public/scripts/main.index.js' > wiki-pages/JSDoc:-main.index.js.md
+                  npx -c 'jsdoc2md source/public/scripts/main.recipe.js' > wiki-pages/JSDoc:-main.recipe.js.md
+
+            - name: Upload Files to Wiki
+              uses: SwiftDocOrg/github-wiki-publish-action@v1
+              with:
+                  path: 'wiki-pages'
+              env:
+                  GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}

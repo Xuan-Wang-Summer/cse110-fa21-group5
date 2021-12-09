@@ -1,10 +1,11 @@
 name: Generate Documentation
 
-# on: pull_request
 on:
     push:
+        branches:
+            - main
         paths:
-            - '.github/workflows/**'
+            - '.github/workflows/generate-documentation.yml'
             - 'source/**.js'
 
 jobs:
@@ -14,14 +15,16 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v2
+              with:
+                  token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
             - name: Compile Docs
               uses: andstor/jsdoc-action@v1
               with:
-                  source_dir: ./source
+                  source_dir: ./source/public/scripts
                   output_dir: ./source/docs
                   template: minami
-                  front_page: README.md
+                  front_page: ./source/README.md
                   recurse: true
 
             - name: Commit and Push

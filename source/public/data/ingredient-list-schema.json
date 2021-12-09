@@ -1,0 +1,12 @@
+{
+	"@context": "https://schema.org",
+	"@type": "ItemList",
+	"name": "",
+	"itemListElement": [
+		{
+			"@type": "Thing",
+			"name": "",
+			"checked": false
+		}
+	]
+}
