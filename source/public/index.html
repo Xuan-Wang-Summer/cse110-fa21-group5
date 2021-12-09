@@ -103,8 +103,12 @@
                     aria-label="Search">
             </form>
 
-            <button id="createBtn" class="btn btn-success pt-2">
+            <button id="createBtn" class="btn btn-success pt-2 mb-3">
                 <i class="fa-solid fa-plus"></i> Create new recipe
+            </button>
+
+            <button id="clearBtn" class="btn btn-danger pt-2" data-bs-toggle="modal" data-bs-target="#clearModal">
+                <i class="fa-solid fa-trash"></i> Clear all your recipes
             </button>
         </div>
     </aside>
@@ -187,6 +191,26 @@
 
             </section>
         </main>
+
+        <!-- Clear Recipes Modal -->
+        <div id="clearModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Clear all your recipes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to clear all recipes from your collection?
+                        <br>
+                        You will not be able to restore them!
+                    </div>
+                    <div class="modal-footer">
+                        <button id="confirmClearBtn" type="button" class="btn btn-danger">Yes, I'm sure!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Corner Action Buttons (default: visible) -->
         <!-- <div id="cornerBtns" class="d-flex flex-column gap-2">

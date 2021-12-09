@@ -74,7 +74,7 @@ function createIngredientList(ingredientArr) {
  */
 function createTagList(data) {
 	let tagArr = [];
-	const fieldsToCheck = ['recipeCuisines', 'recipeCategory'];
+	const fieldsToCheck = ['recipeCuisine', 'recipeCuisines', 'recipeCategory'];
 
 	fieldsToCheck.forEach((field) => {
 		const fieldValue = searchForKey(data, field);

@@ -125,7 +125,7 @@ function activateAddBtn() {
 		localStorage.setItem('recipes', JSON.stringify(userRecipes));
 
 		// Redirect user to their new recipe.
-		window.location.href = `/recipe.html?source=user&id=${userRecipes.length - 1}`;
+		window.location.href = `/recipe.html?source=user&id=${userRecipes.length - 1}#new`;
 	});
 }
 
@@ -252,6 +252,30 @@ function activateDeleteBtn() {
 	});
 }
 
+function activateGroceryBtn() {
+	const groceryBtn = document.getElementById('groceryBtn');
+	groceryBtn.addEventListener('click', function () {
+		const recipe = JSON.parse(recipeJSON.textContent);
+		const ingredients = searchForKey(recipe, 'recipeIngredient');
+
+		const groceryList = JSON.parse(localStorage.getItem('grocery-list'));
+		groceryList[id].name = searchForKey(recipe, 'name');
+		groceryList[id].itemListElement = [];
+		ingredients.forEach((ingredient) => {
+			groceryList[id].itemListElement.push({
+				'@type': 'Thing',
+				name: ingredient,
+				checked: false
+			});
+		});
+
+		localStorage.setItem('grocery-list', JSON.stringify(groceryList));
+
+		// Redirect user to the grocery list page.
+		window.location.href = `/grocery-list.html`;
+	});
+}
+
 function fetchNutrition() {
 	/** {'CalorieNinjas Name': 'JSON Name'} */
 	const CALORIE_NINJAS_MAP = {
@@ -272,6 +296,9 @@ function fetchNutrition() {
 	// TODO: Make API Call with current ingredients
 	const recipeYield = searchForKey(data, 'recipeYield') || 1;
 	const ingredientsString = searchForKey(data, 'recipeIngredient').join(', ');
+	if (!ingredientsString) {
+		return;
+	}
 	caloriesNinjasNutritions(ingredientsString).then((response) => {
 		const nutritionTotal = response.items.reduce((previousItem, currentItem) => {
 			for (const nutritionFact in previousItem) {
@@ -325,6 +352,7 @@ function populateRecipe(data) {
 	// Title
 	const title = document.getElementById('title');
 	title.textContent = searchForKey(data, 'name');
+	document.title = title.textContent;
 
 	// Source author or organization
 	const sourceWriter = document.getElementById('source');
@@ -603,13 +631,6 @@ if (!source || isNaN(id)) {
 	invalidRecipe();
 } else if (source !== 'user' && source !== 'bookmark') {
 	/* CASE: Preset Recipe Source */
-
-	// Delete edit & delete corner buttons
-	deleteCornerBtns(['bookmarkBtn', 'speechBtn', 'editBtn', 'deleteBtn']);
-
-	// Activate add button
-	activateAddBtn();
-
 	/**
 	 * Fetch preset recipe to populate frontend.
 	 */
@@ -620,6 +641,13 @@ if (!source || isNaN(id)) {
 			if (!presetRecipes.hasOwnProperty(source) || !presetRecipes[source][id]) {
 				return invalidRecipe();
 			}
+
+			// Delete edit & delete corner buttons
+			deleteCornerBtns(['bookmarkBtn', 'speechBtn', 'editBtn', 'deleteBtn']);
+			document.getElementById('groceryBtn').remove();
+
+			// Activate add button
+			activateAddBtn();
 
 			const recipeData = presetRecipes[source][id];
 
@@ -635,23 +663,6 @@ if (!source || isNaN(id)) {
 } else if (source === 'user' || source == 'bookmark') {
 	/* CASE: User Recipe Source */
 
-	// Delete add corner button
-	deleteCornerBtns(['addBtn']);
-
-	// Activate speech butotn
-	activateSpeechBtn();
-
-	// Activate delete button
-	activateDeleteBtn();
-
-	activateBookmarkBtn();
-
-	// Show edit drawer upon showing a completely new recipe
-	if (location.hash === '#new') {
-		const drawer = document.getElementById('drawer');
-		drawer.classList.add('show');
-	}
-
 	/**
 	 * Access local storage to retrieve recipe data.
 	 */
@@ -666,6 +677,45 @@ if (!source || isNaN(id)) {
 	if (!recipeData) {
 		invalidRecipe();
 	} else {
+		// Delete add corner button
+		deleteCornerBtns(['addBtn']);
+
+		// Activate speech butotn
+		activateSpeechBtn();
+
+		// Activate delete button
+		activateDeleteBtn();
+
+		// Activate bookmark button
+		activateBookmarkBtn();
+
+		// Activate grocery button
+		activateGroceryBtn();
+
+		// Show edit drawer upon showing a completely new recipe
+		if (location.hash === '#new') {
+			const drawer = document.getElementById('drawer');
+			drawer.classList.add('show');
+
+			fetch('/data/ingredient-list-schema.json')
+				.then((response) => response.json())
+				.then((ingredientListSchema) => {
+					/**
+					 * Create new empty ingredient list in grocery list.
+					 */
+					// Retreive recipes array and push new recipe.
+					const groceryList = JSON.parse(localStorage.getItem('grocery-list')) || [];
+					if (!groceryList[id]) {
+						ingredientListSchema.itemListElement.pop();
+						groceryList.push(ingredientListSchema);
+
+						// Update recipes array in storage.
+						localStorage.setItem('grocery-list', JSON.stringify(groceryList));
+					}
+				})
+				.catch((err) => console.error(err));
+		}
+
 		populateRecipe(recipeData);
 		populateDrawer();
 		activateDrawerEditing();

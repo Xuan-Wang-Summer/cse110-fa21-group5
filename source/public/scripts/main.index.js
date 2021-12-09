@@ -56,8 +56,39 @@ function activateCreateBtn() {
 	});
 }
 
+/**
+ * "Delete recipe" button logic.
+ */
+function activateClearBtn() {
+	const clearBtn = document.getElementById('confirmClearBtn');
+	clearBtn.addEventListener('click', function () {
+		localStorage.clear();
+		location.reload();
+	});
+}
+
 function createCards(recipeArr, source, parent) {
 	const templateCard = document.getElementById('templateCard');
+
+	if (recipeArr.length === 0) {
+		parent.classList.remove('row');
+		parent.classList.add('text-center');
+
+		const newHeading = document.createElement('h4');
+		newHeading.textContent =
+			'Add recipes to your collection by either creating one from scratch' +
+			' or by viewing & cloning a preset recipe.';
+		parent.appendChild(newHeading);
+
+		const newButton = document.createElement('button');
+		newButton.classList = 'btn btn-success';
+		newButton.textContent = 'Create recipe from scratch';
+		newButton.addEventListener('click', function () {
+			const createBtn = document.getElementById('createBtn');
+			createBtn.click();
+		});
+		parent.appendChild(newButton);
+	}
 
 	recipeArr.forEach((recipe, index) => {
 		if (source === 'bookmark' && !recipe.bookmarked) {
@@ -100,7 +131,7 @@ function createCards(recipeArr, source, parent) {
 		// Bookmark symbol
 		if (recipe.bookmarked) {
 			const bookmarkSymbol = document.createElement('i');
-			bookmarkSymbol.classList = 'fas fa-xs fa-bookmark text-primary';
+			bookmarkSymbol.classList = 'fas fa-xs fa-bookmark text-primary ms-1';
 			newCard.querySelector('.card-title').append(bookmarkSymbol);
 		}
 
@@ -146,6 +177,9 @@ createCards(userRecipes, 'bookmark', document.getElementById('bookmarkCardGrid')
 
 // Activate create button
 activateCreateBtn();
+
+// Activate clear button
+activateClearBtn();
 
 // Activate drawer search bar
 activateSearchBar();
