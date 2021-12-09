@@ -27,7 +27,7 @@ h6 {
 	font-family: 'Nunito', sans-serif;
 }
 
-input,
+input:not([type="checkbox"]),
 textarea {
 	border-radius: 0.5em !important;
 }
@@ -46,6 +46,10 @@ button:not(.accordion-button) {
 
 button.accordion-button {
 	font-weight: bold;
+}
+
+.w-fit {
+	width: fit-content;
 }
 
 .truncate-2 {

@@ -198,7 +198,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
 
             <!-- Upload Image -->
             <div class="mb-3">
-                <label for="imageInput" class="form-label">Image link</label>
+                <label for="imageInput" class="form-label">Image link (external)</label>
                 <input type="text" class="form-control" id="imageInput" placeholder="Image URL">
             </div>
 
@@ -227,7 +227,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
     </aside>
 
     <!-- Content -->
-    <div id="content" class="flex-fill pt-3">
+    <div id="content" class="flex-fill py-3">
         <main class="container-md">
             <!-- Recipe Container (default: invisible) -->
             <!-- Invisible until population finishes -->
@@ -259,8 +259,6 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
                         </li>
                         <li class="list-group-item">
                             <i class="fa-solid fa-utensils"></i> <b>Servings:</b> <span id="servings">5</span>
-                            &nbsp;
-                            <a class="text-primary" href="#"><i class="fa-solid fa-sort"></i></a>
                         </li>
                     </ul>
                 </article>
@@ -269,7 +267,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
                 <article id="nutritionDiv" class="mb-3">
                     <a class="text-decoration-none fw-bold" href="#nutritionInfo" role="button"
                         data-bs-toggle="collapse" aria-controls="nutritionInfo">
-                        Expand nutrition <i class="fa-solid fa-caret-down"></i>
+                        Expand nutrition (1 serving) <i class="fa-solid fa-caret-down"></i>
                     </a>
                     <div id="nutritionInfo" class="collapse">
                         <ul class="list-inline mb-0">
@@ -322,8 +320,8 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
                     <article id="ingredientsDiv" class="col-4 text-start">
                         <h3 class="mb-3">
                             Ingredients
-                            <button class="btn border ms-md-2" data-bs-toggle="tooltip"
-                                title="Choose items to add to grocery list">
+                            <button id="groceryBtn" class="btn border ms-md-2" data-bs-toggle="tooltip"
+                                title="Add ingredients to grocery list">
                                 <i class="fa-solid fa-plus"></i>
                                 <i class="fa-solid fa-basket-shopping"></i>
                             </button>
@@ -347,7 +345,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
         <!-- Corner Action Buttons (default: invisible) -->
         <div id="cornerBtns" class="d-flex flex-column gap-2 invisible">
             <button id="bookmarkBtn" class="btn btn-primary rounded-pill pt-2" data-bs-toggle="tooltip"
-                data-bs-placement="left" title="Bookmark recipe">
+                data-bs-placement="left">
                 <i class="fa-solid fa-bookmark"></i>
             </button>
             <button id="addBtn" class="btn btn-primary rounded-pill pt-2" data-bs-toggle="tooltip"
@@ -366,6 +364,19 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
                 data-bs-target="#deleteModal" data-bs-placement="left" title="Delete recipe">
                 <i class="fa-solid fa-trash"></i>
             </button>
+        </div>
+
+        <!-- Speech recognition alert -->
+        <div id="voiceCommands" class="alert alert-secondary fade fixed-top w-fit ms-auto m-3" role="alert">
+            <i class="fas fa-circle-info"></i> <strong>Voice commands!</strong>
+            <br>
+            Next: Move to next step
+            <br>
+            Repeat: Repeat instruction
+            <br>
+            Back: Move to previous step
+            <br>
+            Stop: End speech recognition
         </div>
 
         <!-- Delete Recipe Modal -->

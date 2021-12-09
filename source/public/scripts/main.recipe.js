@@ -28,19 +28,6 @@ recipeJSON.setAttribute('type', 'application/ld+json');
 /** ['prepTime', 'cookTime', 'totalTime'] */
 const TIME_FIELDS = ['prepTime', 'cookTime', 'totalTime'];
 
-/** {'CalorieNinjas Name': 'JSON Name'} */
-const CALORIE_NINJAS_MAP = {
-	calories: 'calories',
-	carbohydrates_total_g: 'carbohydrateContent',
-	cholesterol_mg: 'cholesterolContent',
-	fiber_g: 'fiberContent',
-	fat_total_g: 'fatContent',
-	fat_saturated_g: 'saturatedFatContent',
-	protein_g: 'proteinContent',
-	sodium_mg: 'sodiumContent',
-	sugar_g: 'sugarContent'
-};
-
 /**
  * Container with recipe data elements.
  */
@@ -138,7 +125,7 @@ function activateAddBtn() {
 		localStorage.setItem('recipes', JSON.stringify(userRecipes));
 
 		// Redirect user to their new recipe.
-		window.location.href = `/recipe.html?source=user&id=${userRecipes.length - 1}`;
+		window.location.href = `/recipe.html?source=user&id=${userRecipes.length - 1}#new`;
 	});
 }
 
@@ -146,9 +133,23 @@ function activateAddBtn() {
  * "Toggle speech commands" button logic.
  */
 function activateSpeechBtn() {
+	const initMessage =
+		'Hello! Speech recognition service can help you get instructions ' +
+		'step by step without touching your device. Use the voice commands in the top right.';
+
+	const voiceCommandsAlert = document.getElementById('voiceCommands');
 	const speechBtn = document.getElementById('speechBtn');
 	speechBtn.addEventListener('click', function () {
-		console.log('speech recognition activated!');
+		console.log('Speech recognition activated!');
+
+		// Change corner button style
+		speechBtn.classList.remove('btn-secondary');
+		speechBtn.classList.add('btn-outline-secondary');
+
+		// Show voice commands
+		voiceCommandsAlert.classList.add('show');
+		voiceCommandsAlert.classList.remove('hide');
+
 		let OutputMsg = new SpeechSynthesisUtterance();
 
 		// Output voice type setting
@@ -158,8 +159,12 @@ function activateSpeechBtn() {
 		OutputMsg.volume = 1; //0-1
 
 		// An introduction for customers.
-		OutputMsg.text =
-			'Hello! Speech recognition service can help you get instructions step by step without touching your phones. Say, Next, to start instructions or move to the next step. Say, Repeat, to let me repeat what I said. Say, Back, to move to previous step, Say, Stop. to end the speech service.';
+		OutputMsg.text = initMessage;
+		window.speechSynthesis.speak(OutputMsg);
+
+		// Say step 1
+		const steps = document.getElementById('steps');
+		OutputMsg.text = `Step 1: ${steps.children[0].textContent}`;
 		window.speechSynthesis.speak(OutputMsg);
 
 		// Speech Recognition setting
@@ -169,42 +174,41 @@ function activateSpeechBtn() {
 		Recognition.interimResults = false;
 		Recognition.maxAlternative = 1;
 
-		let currentStep = -1; // it starts from -1 because we need command 'next' to start the first step.
-		console.log(document.getElementsByTagName('ol')[0].children);
+		let currentStep = 0; // it starts from -1 because we need command 'next' to start the first step.
 		let continueRecognition = true; //continuously run speech recognition or not
 		Recognition.start();
 
 		Recognition.onresult = function (event) {
 			var InputMsg = event.results[0][0].transcript;
-			console.log(InputMsg);
+			console.log(`Received voice command: ${InputMsg}`);
 
-			if (InputMsg === 'Next' || InputMsg === 'Next.') {
-				if (currentStep >= document.getElementsByTagName('ol')[0].children.length - 1) {
-					OutputMsg.text = 'we just went through the final step!';
-					//Response when users call 'next' when they already reach the final step.
+			const steps = document.getElementById('steps');
+
+			if (InputMsg.includes('next')) {
+				if (currentStep >= steps.children.length - 1) {
+					OutputMsg.text = 'We just went through the final step!';
+					// Response when users call 'next' when they already reach the final step.
 					window.speechSynthesis.speak(OutputMsg);
 				} else {
 					currentStep++;
-					OutputMsg.text = document.getElementsByTagName('ol')[0].children[currentStep].innerText;
+					steps.children[currentStep].click();
+					OutputMsg.text = steps.children[currentStep].textContent;
 					window.speechSynthesis.speak(OutputMsg);
 				}
-			} else if (InputMsg === 'Repeat' || InputMsg === 'Repeat.') {
+			} else if (InputMsg.includes('repeat')) {
 				window.speechSynthesis.speak(OutputMsg);
-			} else if (InputMsg === 'Back' || InputMsg === 'Back.') {
-				if (currentStep == -1) {
-					OutputMsg.text = `we have not started the cooking instructions yet. Say 'next' to start the instruction`;
-					//Response when users call 'back' when they haven't called any 'next'.
-					window.speechSynthesis.speak(OutputMsg);
-				} else if (currentStep == 0) {
-					OutputMsg.text = 'we just went through the first step!';
-					//Response when users call 'back' when they already reach back to the first back.
+			} else if (InputMsg.includes('back')) {
+				if (currentStep == 0) {
+					OutputMsg.text = 'We just went through the first step!';
+					// Response when users call 'back' when they already reach back to the first back.
 					window.speechSynthesis.speak(OutputMsg);
 				} else {
 					currentStep--;
-					OutputMsg.text = document.getElementsByTagName('ol')[0].children[currentStep].innerText;
+					steps.children[currentStep].click();
+					OutputMsg.text = steps.children[currentStep].textContent;
 					window.speechSynthesis.speak(OutputMsg);
 				}
-			} else if (InputMsg === 'Stop' || InputMsg === 'Stop.') {
+			} else if (InputMsg.includes('stop')) {
 				continueRecognition = false;
 			}
 		};
@@ -213,9 +217,15 @@ function activateSpeechBtn() {
 			if (continueRecognition == true) {
 				Recognition.start();
 			} else {
-				//Thank Users in the End.
+				// Thank Users in the End.
 				OutputMsg.text = 'Thank you for using speech recognition service!';
 				window.speechSynthesis.speak(OutputMsg);
+
+				speechBtn.classList.add('btn-secondary');
+				speechBtn.classList.remove('btn-outline-secondary');
+
+				voiceCommandsAlert.classList.add('hide');
+				voiceCommandsAlert.classList.remove('show');
 			}
 		};
 	});
@@ -242,12 +252,53 @@ function activateDeleteBtn() {
 	});
 }
 
+function activateGroceryBtn() {
+	const groceryBtn = document.getElementById('groceryBtn');
+	groceryBtn.addEventListener('click', function () {
+		const recipe = JSON.parse(recipeJSON.textContent);
+		const ingredients = searchForKey(recipe, 'recipeIngredient');
+
+		const groceryList = JSON.parse(localStorage.getItem('grocery-list'));
+		groceryList[id].name = searchForKey(recipe, 'name');
+		groceryList[id].itemListElement = [];
+		ingredients.forEach((ingredient) => {
+			groceryList[id].itemListElement.push({
+				'@type': 'Thing',
+				name: ingredient,
+				checked: false
+			});
+		});
+
+		localStorage.setItem('grocery-list', JSON.stringify(groceryList));
+
+		// Redirect user to the grocery list page.
+		window.location.href = `/grocery-list.html`;
+	});
+}
+
 function fetchNutrition() {
+	/** {'CalorieNinjas Name': 'JSON Name'} */
+	const CALORIE_NINJAS_MAP = {
+		calories: 'calories',
+		carbohydrates_total_g: 'carbohydrateContent',
+		cholesterol_mg: 'cholesterolContent',
+		fiber_g: 'fiberContent',
+		fat_total_g: 'fatContent',
+		fat_saturated_g: 'saturatedFatContent',
+		protein_g: 'proteinContent',
+		sodium_mg: 'sodiumContent',
+		sugar_g: 'sugarContent'
+	};
+
 	let data = JSON.parse(recipeJSON.textContent);
 
 	// Nutrition has not been stored - store it & populate front-end
 	// TODO: Make API Call with current ingredients
+	const recipeYield = searchForKey(data, 'recipeYield') || 1;
 	const ingredientsString = searchForKey(data, 'recipeIngredient').join(', ');
+	if (!ingredientsString) {
+		return;
+	}
 	caloriesNinjasNutritions(ingredientsString).then((response) => {
 		const nutritionTotal = response.items.reduce((previousItem, currentItem) => {
 			for (const nutritionFact in previousItem) {
@@ -261,7 +312,7 @@ function fetchNutrition() {
 			const jsonMapping = CALORIE_NINJAS_MAP[nutritionFact];
 			if (jsonMapping) {
 				const nutritionValue = nutritionTotal[nutritionFact];
-				data.nutrition[jsonMapping] = Math.round(nutritionValue);
+				data.nutrition[jsonMapping] = Math.round(nutritionValue / recipeYield);
 			}
 		}
 
@@ -301,13 +352,14 @@ function populateRecipe(data) {
 	// Title
 	const title = document.getElementById('title');
 	title.textContent = searchForKey(data, 'name');
+	document.title = title.textContent;
 
 	// Source author or organization
-	const source = document.getElementById('source');
+	const sourceWriter = document.getElementById('source');
 	if (searchForKey(data, 'publisher')) {
-		source.textContent = searchForKey(data, 'publisher').name || 'Source N/A';
+		sourceWriter.textContent = searchForKey(data, 'publisher').name || 'Source N/A';
 	} else {
-		source.textContent = searchForKey(data, 'author').name || 'Source N/A';
+		sourceWriter.textContent = searchForKey(data, 'author').name || 'Source N/A';
 	}
 
 	// Source link
@@ -579,13 +631,6 @@ if (!source || isNaN(id)) {
 	invalidRecipe();
 } else if (source !== 'user' && source !== 'bookmark') {
 	/* CASE: Preset Recipe Source */
-
-	// Delete edit & delete corner buttons
-	deleteCornerBtns(['bookmarkBtn', 'speechBtn', 'editBtn', 'deleteBtn']);
-
-	// Activate add button
-	activateAddBtn();
-
 	/**
 	 * Fetch preset recipe to populate frontend.
 	 */
@@ -596,6 +641,13 @@ if (!source || isNaN(id)) {
 			if (!presetRecipes.hasOwnProperty(source) || !presetRecipes[source][id]) {
 				return invalidRecipe();
 			}
+
+			// Delete edit & delete corner buttons
+			deleteCornerBtns(['bookmarkBtn', 'speechBtn', 'editBtn', 'deleteBtn']);
+			document.getElementById('groceryBtn').remove();
+
+			// Activate add button
+			activateAddBtn();
 
 			const recipeData = presetRecipes[source][id];
 
@@ -611,23 +663,6 @@ if (!source || isNaN(id)) {
 } else if (source === 'user' || source == 'bookmark') {
 	/* CASE: User Recipe Source */
 
-	// Delete add corner button
-	deleteCornerBtns(['addBtn']);
-
-	// Activate speech butotn
-	activateSpeechBtn();
-
-	// Activate delete button
-	activateDeleteBtn();
-
-	activateBookmarkBtn();
-
-	// Show edit drawer upon showing a completely new recipe
-	if (location.hash === '#new') {
-		const drawer = document.getElementById('drawer');
-		drawer.classList.add('show');
-	}
-
 	/**
 	 * Access local storage to retrieve recipe data.
 	 */
@@ -642,6 +677,45 @@ if (!source || isNaN(id)) {
 	if (!recipeData) {
 		invalidRecipe();
 	} else {
+		// Delete add corner button
+		deleteCornerBtns(['addBtn']);
+
+		// Activate speech butotn
+		activateSpeechBtn();
+
+		// Activate delete button
+		activateDeleteBtn();
+
+		// Activate bookmark button
+		activateBookmarkBtn();
+
+		// Activate grocery button
+		activateGroceryBtn();
+
+		// Show edit drawer upon showing a completely new recipe
+		if (location.hash === '#new') {
+			const drawer = document.getElementById('drawer');
+			drawer.classList.add('show');
+
+			fetch('/data/ingredient-list-schema.json')
+				.then((response) => response.json())
+				.then((ingredientListSchema) => {
+					/**
+					 * Create new empty ingredient list in grocery list.
+					 */
+					// Retreive recipes array and push new recipe.
+					const groceryList = JSON.parse(localStorage.getItem('grocery-list')) || [];
+					if (!groceryList[id]) {
+						ingredientListSchema.itemListElement.pop();
+						groceryList.push(ingredientListSchema);
+
+						// Update recipes array in storage.
+						localStorage.setItem('grocery-list', JSON.stringify(groceryList));
+					}
+				})
+				.catch((err) => console.error(err));
+		}
+
 		populateRecipe(recipeData);
 		populateDrawer();
 		activateDrawerEditing();
