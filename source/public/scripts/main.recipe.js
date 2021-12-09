@@ -65,11 +65,53 @@ function invalidRecipe() {
 
 /**
  * Deletes specified corner buttons.
- * @param {string[]} btnIds - IDs of buttons to delete. {'addBtn', 'editBtn', 'deleteBtn'}
+ * @param {string[]} btnIds - IDs of buttons to delete. {'bookmarkBtn','addBtn', 'editBtn', 'deleteBtn'}
  */
 function deleteCornerBtns(btnIds) {
 	btnIds.forEach((btnId) => {
 		cornerBtnsDiv.removeChild(document.getElementById(btnId));
+	});
+}
+
+/**
+ * "Bookmark recipe" button logic.
+ */
+function activateBookmarkBtn() {
+	const bookmarkBtn = document.getElementById('bookmarkBtn');
+
+	function styleBookmarkBtn() {
+		const userRecipes = JSON.parse(localStorage.getItem('recipes'));
+		const recipe = userRecipes[id];
+
+		if (recipe.bookmarked) {
+			bookmarkBtn.classList.remove('btn-primary');
+			bookmarkBtn.classList.add('btn-outline-primary');
+
+			bookmarkBtn.setAttribute('data-bs-original-title', 'Un-bookmark recipe');
+		} else {
+			bookmarkBtn.classList.add('btn-primary');
+			bookmarkBtn.classList.remove('btn-outline-primary');
+
+			bookmarkBtn.setAttribute('data-bs-original-title', 'Bookmark recipe');
+		}
+	}
+
+	styleBookmarkBtn();
+
+	bookmarkBtn.addEventListener('click', function () {
+		/**
+		 * Toggle bookmarked status of recipe in user recipes array.
+		 */
+		// Retreive recipes array.
+		const userRecipes = JSON.parse(localStorage.getItem('recipes'));
+
+		const recipe = userRecipes[id];
+		recipe.bookmarked = !recipe.bookmarked;
+
+		localStorage.setItem('recipes', JSON.stringify(userRecipes));
+		recipeJSON.textContent = JSON.stringify(recipe);
+
+		styleBookmarkBtn();
 	});
 }
 
@@ -84,10 +126,11 @@ function activateAddBtn() {
 		 */
 		// Retreive recipes array and push new recipe.
 		const userRecipes = JSON.parse(localStorage.getItem('recipes')) || [];
-		let recipeData = JSON.parse(recipeJSON.textContent);
+		const recipeData = JSON.parse(recipeJSON.textContent);
 
 		//TODO: Add additional schema fields to fetched data (URL)
 		recipeData.tags = createTagList(recipeData).string;
+		recipeData.bookmarked = false;
 
 		userRecipes.push(recipeData);
 
@@ -149,8 +192,7 @@ function activateSpeechBtn() {
 				window.speechSynthesis.speak(OutputMsg);
 			} else if (InputMsg === 'Back' || InputMsg === 'Back.') {
 				if (currentStep == -1) {
-					OutputMsg.text =
-						'we have not started the cooking instructions yet. Say \'next\' to start the instruction';
+					OutputMsg.text = `we have not started the cooking instructions yet. Say 'next' to start the instruction`;
 					//Response when users call 'back' when they haven't called any 'next'.
 					window.speechSynthesis.speak(OutputMsg);
 				} else if (currentStep == 0) {
@@ -535,11 +577,11 @@ console.groupEnd('Local storage');
 // Validate recipe source and id
 if (!source || isNaN(id)) {
 	invalidRecipe();
-} else if (source !== 'user') {
+} else if (source !== 'user' && source !== 'bookmark') {
 	/* CASE: Preset Recipe Source */
 
 	// Delete edit & delete corner buttons
-	deleteCornerBtns(['speechBtn', 'editBtn', 'deleteBtn']);
+	deleteCornerBtns(['bookmarkBtn', 'speechBtn', 'editBtn', 'deleteBtn']);
 
 	// Activate add button
 	activateAddBtn();
@@ -566,7 +608,7 @@ if (!source || isNaN(id)) {
 			activateDrawerEditing();
 		})
 		.catch((err) => console.error(err));
-} else if (source === 'user') {
+} else if (source === 'user' || source == 'bookmark') {
 	/* CASE: User Recipe Source */
 
 	// Delete add corner button
@@ -577,6 +619,8 @@ if (!source || isNaN(id)) {
 
 	// Activate delete button
 	activateDeleteBtn();
+
+	activateBookmarkBtn();
 
 	// Show edit drawer upon showing a completely new recipe
 	if (location.hash === '#new') {

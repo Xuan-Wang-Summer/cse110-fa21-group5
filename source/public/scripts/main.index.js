@@ -33,11 +33,16 @@ function activateCreateBtn() {
 }
 
 function createCards(recipeArr, source, parent) {
-	const templateCard = document.querySelector('.recipe-card');
+	const templateCard = document.getElementById('templateCard');
 
 	recipeArr.forEach((recipe, index) => {
+		if (source === 'bookmark' && !recipe.bookmarked) {
+			return;
+		}
+
 		// Clone new card
 		const newCard = templateCard.cloneNode(true);
+		newCard.removeAttribute('id');
 		newCard.classList.remove('d-none');
 
 		// Thumbnail
@@ -67,6 +72,13 @@ function createCards(recipeArr, source, parent) {
 		// Tags
 		const tags = newCard.querySelector('.tags');
 		tags.textContent = searchForKey(recipe, 'tags') || createTagList(recipe).string;
+
+		// Bookmark symbol
+		if (recipe.bookmarked) {
+			const bookmarkSymbol = document.createElement('i');
+			bookmarkSymbol.classList = 'fas fa-xs fa-bookmark text-primary';
+			newCard.querySelector('.card-title').append(bookmarkSymbol);
+		}
 
 		// Author
 		const author = newCard.querySelector('.author');
@@ -106,6 +118,7 @@ fetch('/data/recipe-data.json')
  */
 const userRecipes = JSON.parse(localStorage.getItem('recipes')) || [];
 createCards(userRecipes, 'user', document.getElementById('userCardGrid'));
+createCards(userRecipes, 'bookmark', document.getElementById('bookmarkCardGrid'));
 
 // Activate create button
 activateCreateBtn();

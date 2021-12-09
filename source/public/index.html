@@ -90,6 +90,10 @@
                         type="button" role="tab" aria-controls="userTab" aria-selected="false">
                         Your Recipes
                     </button>
+                    <button class="nav-link" id="navBookmarkTab" data-bs-toggle="pill" data-bs-target="#bookmarkTab"
+                    type="button" role="tab" aria-controls="bookmarkTab" aria-selected="false">
+                        Bookmarked Recipes
+                    </button>
                 </div>
             </div>
 
@@ -127,10 +131,15 @@
 
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="bookmarkTab" role="tabpanel" aria-labelledby="navBookmarkTab">
+                        <div id="bookmarkCardGrid" class="row g-3">
+
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Template Card -->
-                <div class="recipe-card col-xl-6 d-none">
+                <div id="templateCard" class="recipe-card col-xl-6 d-none">
                     <!-- Recipe Card -->
                     <div class="card h-100">
                         <div class="row g-0 align-items-center">
