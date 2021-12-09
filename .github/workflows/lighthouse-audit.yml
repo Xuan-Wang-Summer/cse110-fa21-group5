@@ -13,7 +13,7 @@ jobs:
       with:
         issue-number: ${{ github.event.pull_request.number }}
         body: |
-          Generating a Lighthouse Report for [https://team-ocean-recipes.netlify.app/](https://team-ocean-recipes.netlify.app/)
+          Generating a Lighthouse Report for ${{ format('https://deploy-preview-{0}--team-ocean-recipes.netlify.app', github.event.pull_request.number) }}
           .
           .
           .
