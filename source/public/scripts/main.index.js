@@ -109,3 +109,38 @@ createCards(userRecipes, 'user', document.getElementById('userCardGrid'));
 
 // Activate create button
 activateCreateBtn();
+
+// ----- Search Function Implementation -----
+const searchBtn = document.getElementById('RecipeSearchBtn');
+const searchBar = document.getElementById('RecipeSearchBar');
+const presetTab = document.getElementById('presetTab');
+searchBtn.addEventListener('click', function () {
+	let searchTxt = searchBar.value;//get input message
+	let currentList;
+	if(presetTab.classList.contains('active')){//check which tab is active
+		currentList = document.getElementById('presetCardGrid');
+	}else{
+		currentList = document.getElementById('userCardGrid');
+	}
+	let index = 0;
+	while(currentList.children[index] != null){
+		let currentTitle = currentList.children[index].children[0].children[0].children[1].children[0].children[0].innerText;
+		//convert title and input message to lower case
+		let lowerTitle = '';
+		for(let i = 0; i < currentTitle.length; i++){
+			lowerTitle = lowerTitle + currentTitle.charAt(i).toLowerCase();
+		}
+		let lowerInput = '';
+		for(let i = 0; i < searchTxt.length; i++){
+			lowerInput = lowerInput + searchTxt.charAt(i).toLowerCase();
+		}
+		
+		if(lowerTitle.includes(lowerInput)){
+			currentList.children[index].classList.remove('d-none');
+		}else{
+			currentList.children[index].classList.add('d-none');
+		}
+
+		index++;
+	}
+});
