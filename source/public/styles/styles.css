@@ -48,6 +48,10 @@ button.accordion-button {
 	font-weight: bold;
 }
 
+.w-fit {
+	width: fit-content;
+}
+
 .truncate-2 {
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2;

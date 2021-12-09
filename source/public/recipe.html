@@ -198,7 +198,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
 
             <!-- Upload Image -->
             <div class="mb-3">
-                <label for="imageInput" class="form-label">Image link</label>
+                <label for="imageInput" class="form-label">Image link (external)</label>
                 <input type="text" class="form-control" id="imageInput" placeholder="Image URL">
             </div>
 
@@ -227,7 +227,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
     </aside>
 
     <!-- Content -->
-    <div id="content" class="flex-fill pt-3">
+    <div id="content" class="flex-fill py-3">
         <main class="container-md">
             <!-- Recipe Container (default: invisible) -->
             <!-- Invisible until population finishes -->
@@ -259,8 +259,6 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
                         </li>
                         <li class="list-group-item">
                             <i class="fa-solid fa-utensils"></i> <b>Servings:</b> <span id="servings">5</span>
-                            &nbsp;
-                            <a class="text-primary" href="#"><i class="fa-solid fa-sort"></i></a>
                         </li>
                     </ul>
                 </article>
@@ -347,7 +345,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
         <!-- Corner Action Buttons (default: invisible) -->
         <div id="cornerBtns" class="d-flex flex-column gap-2 invisible">
             <button id="bookmarkBtn" class="btn btn-primary rounded-pill pt-2" data-bs-toggle="tooltip"
-                data-bs-placement="left" title="Bookmark recipe">
+                data-bs-placement="left">
                 <i class="fa-solid fa-bookmark"></i>
             </button>
             <button id="addBtn" class="btn btn-primary rounded-pill pt-2" data-bs-toggle="tooltip"
@@ -366,6 +364,19 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dolorem, corpor
                 data-bs-target="#deleteModal" data-bs-placement="left" title="Delete recipe">
                 <i class="fa-solid fa-trash"></i>
             </button>
+        </div>
+
+        <!-- Speech recognition alert -->
+        <div id="voiceCommands" class="alert alert-secondary fade fixed-top w-fit ms-auto m-3" role="alert">
+            <i class="fas fa-circle-info"></i> <strong>Voice commands!</strong>
+            <br>
+            Next: Move to next step
+            <br>
+            Repeat: Repeat instruction
+            <br>
+            Back: Move to previous step
+            <br>
+            Stop: End speech recognition
         </div>
 
         <!-- Delete Recipe Modal -->

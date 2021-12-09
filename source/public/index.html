@@ -91,30 +91,26 @@
                         Your Recipes
                     </button>
                     <button class="nav-link" id="navBookmarkTab" data-bs-toggle="pill" data-bs-target="#bookmarkTab"
-                    type="button" role="tab" aria-controls="bookmarkTab" aria-selected="false">
+                        type="button" role="tab" aria-controls="bookmarkTab" aria-selected="false">
                         Bookmarked Recipes
                     </button>
                 </div>
             </div>
 
-            <h6>Type</h6>
-            <!-- TODO: List for different main filters -->
-            <button class="btn btn-outline-dark">
-                <i class="fa-solid fa-plus"></i> Add Filter
-            </button>
-
-            <h6 class="mt-3">Filtering</h6>
-            <!-- TODO: System for filtering -->
-
-            <form class="d-flex">
-                <input id='RecipeSearchBar' class="form-control me-2" type="search" placeholder="Search for a recipe!" aria-label="Search">
-                <button id='RecipeSearchBtn' class="btn btn-outline-success" type="button">Search</button>
+            <form action="#" class="mb-3">
+                <label for="recipeSearchBar">Search</label>
+                <input id="recipeSearchBar" class="form-control" type="search" placeholder="Search recipes by title!"
+                    aria-label="Search">
             </form>
+
+            <button id="createBtn" class="btn btn-success pt-2">
+                <i class="fa-solid fa-plus"></i> Create new recipe
+            </button>
         </div>
     </aside>
 
     <!-- Content -->
-    <div id="content" class="flex-fill pt-3">
+    <div id="content" class="flex-fill py-3">
         <main class="container">
             <section id="recipes" class="container">
                 <h2 class="text-center">Recipes</h2>
@@ -155,7 +151,8 @@
                                 <div class="card-body">
                                     <!-- Title -->
                                     <h5 class="card-title text-truncate truncate-2">
-                                        <a href="/recipe.html" class="title text-capitalize"></a>
+                                        <a href="/recipe.html"
+                                            class="title text-capitalize text-decoration-none fw-bold"></a>
                                     </h5>
 
                                     <!-- Tags -->
@@ -192,12 +189,12 @@
         </main>
 
         <!-- Corner Action Buttons (default: visible) -->
-        <div id="cornerBtns" class="d-flex flex-column gap-2">
+        <!-- <div id="cornerBtns" class="d-flex flex-column gap-2">
             <button id="createBtn" class="btn btn-success rounded-pill pt-2" data-bs-toggle="tooltip"
                 data-bs-placement="left" title="Create new recipe">
                 <i class="fa-solid fa-plus"></i>
             </button>
-        </div>
+        </div> -->
     </div>
 
     <!-- JS Libraries -->
