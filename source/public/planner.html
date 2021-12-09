@@ -133,6 +133,7 @@
         <div class="recipe-card col-xl-12 d-none">
             <!-- Recipe Card -->
             <div class="card h-100">
+                
                 <div class="row g-0 align-items-center">
                     <div class="col-md-4">
                         <!-- Thumbnail -->
@@ -146,10 +147,13 @@
                             <h5 class="card-title text-truncate truncate-2">
                                 <a href="/recipe.html" class="title text-capitalize"></a>
                             </h5>
-
                             </p>
                         </div>
                     </div>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recipeModal">
+                        Add to Meal Planner
+                    </button>
                 </div>
             </div>
         </div>
@@ -208,6 +212,44 @@
                   </table>
             </section>
         </main>
+
+        <!-- Modal -->
+            <div class="modal fade" id="recipeModal" tabindex="-1" aria-labelledby="recipeModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="recipeModalLabel">Add to Meal Planner</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label for="dayOfWeek" class="form-label">Day of the Week: </label>
+                               <select id="day" name="days">
+                                    <option value="Sunday">Sunday</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="mealOption" class="form-label">Meal: </label>
+                                <select id="meal" name="meals">
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Lunch">Lunch</option>
+                                    <option value="Dinner">Dinner</option>
+                                </select>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- JS Libraries -->
