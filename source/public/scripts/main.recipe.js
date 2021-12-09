@@ -65,11 +65,35 @@ function invalidRecipe() {
 
 /**
  * Deletes specified corner buttons.
- * @param {string[]} btnIds - IDs of buttons to delete. {'addBtn', 'editBtn', 'deleteBtn'}
+ * @param {string[]} btnIds - IDs of buttons to delete. {'bookmarkBtn','addBtn', 'editBtn', 'deleteBtn'}
  */
 function deleteCornerBtns(btnIds) {
 	btnIds.forEach((btnId) => {
 		cornerBtnsDiv.removeChild(document.getElementById(btnId));
+	});
+}
+
+/**
+ * "Bookmark recipe" button logic.
+ */
+ function activateBookmarkBtn() {
+	const bookmarkBtn = document.getElementById('bookmarkBtn');
+	bookmarkBtn.addEventListener('click', function (event) {
+		/**
+		 * Add recipe data to user recipes array.
+		 */
+		// Retreive recipes array and push new recipe.
+		const userRecipes = JSON.parse(localStorage.getItem('recipes'));
+
+		const recipe = userRecipes[id]
+		if (recipe.bookmarked) {
+			recipe.bookmarked = false 
+		} else {
+			recipe.bookmarked = true
+		}
+
+		localStorage.setItem('recipes', JSON.stringify(userRecipes));
+		window.location.href = `/index.html`;
 	});
 }
 
@@ -88,6 +112,7 @@ function activateAddBtn() {
 
 		//TODO: Add additional schema fields to fetched data (URL)
 		recipeData.tags = createTagList(recipeData).string;
+		recipeData.bookmarked = false
 
 		userRecipes.push(recipeData);
 
@@ -539,7 +564,7 @@ if (!source || isNaN(id)) {
 	/* CASE: Preset Recipe Source */
 
 	// Delete edit & delete corner buttons
-	deleteCornerBtns(['speechBtn', 'editBtn', 'deleteBtn']);
+	deleteCornerBtns(['bookmarkBtn', 'speechBtn', 'editBtn', 'deleteBtn']);
 
 	// Activate add button
 	activateAddBtn();
@@ -551,6 +576,9 @@ if (!source || isNaN(id)) {
 		.then((response) => response.json())
 		.then((presetRecipes) => {
 			// The external recipe source must be in the JSON
+			
+			console.log("PPPPP")
+			console.log(presetRecipes)
 			if (!presetRecipes.hasOwnProperty(source) || !presetRecipes[source][id]) {
 				return invalidRecipe();
 			}
@@ -566,7 +594,7 @@ if (!source || isNaN(id)) {
 			activateDrawerEditing();
 		})
 		.catch((err) => console.error(err));
-} else if (source === 'user') {
+} else if (source === 'user' || source == 'bookmark') {
 	/* CASE: User Recipe Source */
 
 	// Delete add corner button
@@ -577,6 +605,8 @@ if (!source || isNaN(id)) {
 
 	// Activate delete button
 	activateDeleteBtn();
+
+	activateBookmarkBtn();
 
 	// Show edit drawer upon showing a completely new recipe
 	if (location.hash === '#new') {

@@ -36,6 +36,9 @@ function createCards(recipeArr, source, parent) {
 	const templateCard = document.querySelector('.recipe-card');
 
 	recipeArr.forEach((recipe, index) => {
+		if (source == 'bookmark' && !recipe.bookmarked) {
+			return;
+		}
 		// Clone new card
 		const newCard = templateCard.cloneNode(true);
 		newCard.classList.remove('d-none');
@@ -106,6 +109,7 @@ fetch('/data/recipe-data.json')
  */
 const userRecipes = JSON.parse(localStorage.getItem('recipes')) || [];
 createCards(userRecipes, 'user', document.getElementById('userCardGrid'));
+createCards(userRecipes, 'bookmark', document.getElementById('bookmarkCardGrid'));
 
 // Activate create button
 activateCreateBtn();
