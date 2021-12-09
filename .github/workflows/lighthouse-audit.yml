@@ -21,7 +21,7 @@ jobs:
       id: lighthouse-audit
       uses: foo-software/lighthouse-check-action@master
       with:
-        urls: 'https://team-ocean-recipes.netlify.app/'
+        urls: ${{ format('https://deploy-preview-{0}--team-ocean-recipes.netlify.app', github.event.pull_request.number) }}
         gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
         prCommentEnabled: false # toggle this to use foo's default PR comment for audit results
         device: 'desktop'

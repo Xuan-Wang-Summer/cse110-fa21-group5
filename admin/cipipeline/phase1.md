@@ -6,7 +6,8 @@
 - Code Quality via Human Review via PR review
   - Required pull request reviewer + approval
   - Netlify staging app preview
-- Documentation generation w/ JSDoc running on a GitHub action
+  - Lighthouse audit
+- Documentation generation (repo + wiki) w/ JSDoc running on a GitHub action
 
 ## Breakdown
 ### 1) Development - Code Quality
@@ -16,7 +17,7 @@ Our CI/CD pipeline begins on the dev's end, within VSCode. At this stage, we enf
 Once code is committed and pushed to the remote, the next stage of our pipeline begins. On any push which contains changes to a JS file nested within `/source/public`, a GitHub action will trigger to run tests using Jest. This action runs `npm test` to execute all unit tests with Jest, then outputs whether or not these tests succeeded. Currently, tests are created for our utility functions for recipe data parsing. We may also explore further unit tests & E2E testing if we have enough time.
 
 ### 3) Review & Automation - Code Quality
-Moving along in our pipeline, we then have another step to maintain code quality via requiring pull requests to be approved before merging to the main branch. This allows us to protect the main branch by permitting the team to peer review code changes, thereby adding a layer of accountability for devs to follow the enforced code quality practices. In order to make sure that all of the files on the main branch are of good quality, all pull requests must be reviewed by at least one team member before it is merged to main. It is preferred that this reviewer is someone that had not worked on that branch so that they can provide unbiased feedback. To help with the human review process, we have CodeFactor set up on our project so that upon a push, the changes will be evaluated to see if any style mistakes were made. A Netlify staging preview will also be created so that the reviewer can see if any breaking changes are present during the usage of the app. The owner of the pull request can also consider this feedback to additionally inform fixes for potential breaking changes or style mistakes.
+Moving along in our pipeline, we then have another step to maintain code quality via requiring pull requests to be approved before merging to the main branch. This allows us to protect the main branch by permitting the team to peer review code changes, thereby adding a layer of accountability for devs to follow the enforced code quality practices. In order to make sure that all of the files on the main branch are of good quality, all pull requests must be reviewed by at least one team member before it is merged to main. It is preferred that this reviewer is someone that had not worked on that branch so that they can provide unbiased feedback. To help with the human review process, we have CodeFactor set up on our project so that upon a push, the changes will be evaluated to see if any style mistakes were made. A Netlify staging preview will also be created so that the reviewer can see if any breaking changes are present during the usage of the app. The owner of the pull request can also consider this feedback to additionally inform fixes for potential breaking changes or style mistakes. Finally, we have a workflow that runs a Lighthouse audit on the Netlify deployment for that pull request to evaluate the web app. 
 
 ### 4) Documentation
 Next, whenever a push is made to `main`, a GitHub action is initiated which generates code documentation via JSDoc. This documentation is added to the branch in the folder `/source/docs/`, and is viewable via the entry point `/source/docs/index.html`. This method allows all PR merges to include up-to-date code documentation. Additionally, an action is taken to turn JSDoc into Markdown which will be uploaded to the wiki.

@@ -39,6 +39,8 @@ jobs:
                   npx -c 'jsdoc2md source/public/scripts/main.js' > wiki-pages/JSDoc:-main.js.md
                   npx -c 'jsdoc2md source/public/scripts/main.index.js' > wiki-pages/JSDoc:-main.index.js.md
                   npx -c 'jsdoc2md source/public/scripts/main.recipe.js' > wiki-pages/JSDoc:-main.recipe.js.md
+                  npx -c 'jsdoc2md source/public/scripts/main.grocery-list.js' > wiki-pages/JSDoc:-main.grocery-list.js.md
+                  npx -c 'jsdoc2md source/public/scripts/main.planner.js' > wiki-pages/JSDoc:-main.planner.js.md
 
             - name: Upload Files to Wiki
               uses: SwiftDocOrg/github-wiki-publish-action@v1
