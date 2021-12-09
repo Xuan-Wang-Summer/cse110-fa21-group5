@@ -104,6 +104,11 @@ button.accordion-button {
 	margin: 1rem 2rem;
 }
 
+/* ---------- PLANNER PAGE ---------- */
+#plannerTable td {
+	max-width: 12em;
+}
+
 /* ---------- MEDIA QUERIES ---------- */
 /* --- Minimum (Bootstrap breakpoints) --- */
 /* Small devices (landscape phones, 576px and up) */
