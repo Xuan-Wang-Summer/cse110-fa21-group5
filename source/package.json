@@ -4,8 +4,9 @@
   "description": "Recipe manager",
   "main": "index.js",
   "scripts": {
+    "cypress": "cypress open",
     "jsdoc": "jsdoc public -r -d docs",
-    "test": "jest --coverage",
+    "test": "jest",
     "lint": "eslint --fix public/**/*.js"
   },
   "repository": {
@@ -21,8 +22,9 @@
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
+    "cypress": "^9.1.1",
     "eslint": "^8.1.0",
-    "jest": "^27.4.2",
+    "jest": "^27.4.3",
     "jsdoc": "^3.6.7",
     "luxon": "^2.1.1"
   }

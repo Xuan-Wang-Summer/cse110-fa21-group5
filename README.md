@@ -3,6 +3,7 @@
 [![CodeFactor][codefactor-shield]](https://www.codefactor.io/repository/github/cse110-fa21-group5/cse110-fa21-group5)
 [![Netlify Status][netlify-shield]](https://team-ocean-recipes.netlify.app/)
 ![Run Unit Tests](https://github.com/cse110-fa21-group5/cse110-fa21-group5/actions/workflows/run-unit-tests.yml/badge.svg)
+![Run E2E Tests](https://github.com/cse110-fa21-group5/cse110-fa21-group5/actions/workflows/run-e2e-tests.yml/badge.svg)
 
 ## 📘 Our single source of truth!
 

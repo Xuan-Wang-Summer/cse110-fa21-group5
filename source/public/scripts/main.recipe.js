@@ -247,6 +247,16 @@ function activateDeleteBtn() {
 		// Update recipes array in storage.
 		localStorage.setItem('recipes', JSON.stringify(userRecipes));
 
+		/**
+		 * Delete grocery list from grocery list array.
+		 */
+		// Retrieve grocery list array and remove recipe.
+		const groceryList = JSON.parse(localStorage.getItem('recipes'));
+		groceryList.splice(id, 1);
+
+		// Update grocery list array in storage.
+		localStorage.setItem('grocery-list', JSON.stringify(groceryList));
+
 		// Redirect user to the recipes page.
 		window.location.href = `/index.html`;
 	});

@@ -2,6 +2,8 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/cse110-fa21-group5/cse110-fa21-group5/badge?s=5332332ef2c647f086442b3584693dbe4a0b2068)](https://www.codefactor.io/repository/github/cse110-fa21-group5/cse110-fa21-group5)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0552da19-8d05-408c-963e-04f9ea60650d/deploy-status)](https://team-ocean-recipes.netlify.app/)
+![Run Unit Tests](https://github.com/cse110-fa21-group5/cse110-fa21-group5/actions/workflows/run-unit-tests.yml/badge.svg)
+![Run E2E Tests](https://github.com/cse110-fa21-group5/cse110-fa21-group5/actions/workflows/run-e2e-tests.yml/badge.svg)
 
 ## 🚀 Getting Started
 
@@ -21,7 +23,7 @@
 6. If you want to update the remote repostiory, push your changes.
 7. If you then want to merge your changes with the main branch, create a pull request to your branch
    [here](https://github.com/cse110-fa21-group5/cse110-fa21-group5/pulls).
-    - Netlify should
+    - Make sure that your code passes the GitHub Actions (CodeFactor, linting, tests, Netlify deployment ◊behavior)
 
 ### Coding Environment
 
@@ -76,7 +78,7 @@
 
 ### Back-end
 
--   Make sure to comment & check console logs so that debugging messages are not always on.
+-   Make sure to comment & check console logs so that random debugging messages are not always on.
 
 ## 🗒️ Resources
 
