@@ -251,7 +251,7 @@ function activateDeleteBtn() {
 		 * Delete grocery list from grocery list array.
 		 */
 		// Retrieve grocery list array and remove recipe.
-		const groceryList = JSON.parse(localStorage.getItem('recipes'));
+		const groceryList = JSON.parse(localStorage.getItem('grocery-list'));
 		groceryList.splice(id, 1);
 
 		// Update grocery list array in storage.
